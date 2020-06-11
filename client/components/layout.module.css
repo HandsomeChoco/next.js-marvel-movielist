@@ -37,12 +37,14 @@
   
 .content {
     background-color: rgb(200, 200, 200); 
-    height: calc(100vh - 200px);
+    height: calc(100vh - 200px - 60px - 10px);
+    padding: 60px 10px 10px 10px;
 }
 
 .footer {
     background-color: rgb(65, 65, 65);
+    padding: 10px;
     max-width: 880px;
     width: 1fr;
-    height: 200px;
+    height: calc(200px - 10px - 10px);
 }

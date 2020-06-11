@@ -1,0 +1,36 @@
+.loginModuleWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 1fr;
+    height: 288px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("../public/loginbackground.jpg");
+}
+
+.loginInputBox {
+    width: 1fr;
+    height: 1fr;
+    padding: 30px;
+    background-color: rgb(255, 255, 255, 0.5);
+}
+
+.loginInputBox > .loginButton > button {
+    color: white;
+    border: none;
+    background-color: #ed1d24;
+}
+.loginEachInput {
+    border-radius: 3px;
+}
+
+.loginEachInput > div {
+    background-color: white;
+}
+
+.loginButton > button {
+    width: 100%;
+    height: 30px;
+}
