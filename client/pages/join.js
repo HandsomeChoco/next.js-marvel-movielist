@@ -4,12 +4,11 @@ import Layout from '../components/Layout'
 import login from './login.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
-import Link from 'next/link';
 
-class Login extends Component {
+class Join extends Component {
   render() {
     return(
-      <Layout title={'Login to this page'}>
+      <Layout title={'Join to our universe'}>
         <div className={login.loginModuleWrapper}>
           <div className={login.loginInputBox}>
             <div className={login.loginEachInput}>
@@ -23,15 +22,6 @@ class Login extends Component {
             <div className={login.loginButton}> 
               <button>로그인</button>
             </div>
-            <div>
-              <Link href="/join">
-                <a><span>회원 가입</span></a>
-              </Link>
-              <Link href="/find_account">
-                <a><span>계정 찾기</span></a>
-              </Link>
-              
-            </div>
           </div>
         </div>
       </Layout>
@@ -39,4 +29,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Join;

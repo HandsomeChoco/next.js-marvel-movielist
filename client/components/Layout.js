@@ -16,12 +16,19 @@ function Top({ alt }) {
   );
 }
 
-function Footer() {
+function Footer({ items }) {
+  
   return(
     <div className={style.footer}>
-      <Link href="/login">
-        <button>Login</button>
-      </Link>
+      <div>
+        {items.map((data, index) => {
+          return(
+            <Link href={data} key={index}>
+              <a className="footerLink"><span>{data}</span></a>
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -42,7 +49,7 @@ function Layout({ children, title  }) {
       </Head>
       <Top alt={'메인으로 이동 합니다.'}/>
       <Content children = {children}/>
-      <Footer/>
+      <Footer items = {[`Terms of Use`, `Privacy Policy`, `Your California Privacy Rights`, `Do Not Sell My Info`, `Children's Online Privacy Policy`, `License Agreement`, `Interest-Based-Ads`, `Marvel Insider Terms`, `©2020 MARVEL`]}/>
     </div>
   );
 }
