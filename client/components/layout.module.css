@@ -1,8 +1,7 @@
 #container {
     font-family: 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica',
       'Arial', sans-serif;
-    max-width: 880px;
-    width: 1fr;
+    max-width: 100vw;
     margin: auto;
 }
 
@@ -11,7 +10,7 @@
     width: 100%;
     height: 50px;
     position: fixed;
-    max-width: 880px;
+    max-width: 100vw;
     color: #ffffff;
     background-color: #ed1d24;
     text-align: center;
@@ -37,14 +36,14 @@
   
 .content {
     background-color: rgb(200, 200, 200); 
-    height: calc(100vh - 200px - 60px - 10px);
+    min-height: calc(100vh);
     padding: 60px 10px 10px 10px;
 }
 
 .footer {
     background-color: #222222;
     padding: 10px;
-    max-width: 880px;
+    max-width: 100vw;
     width: 1fr;
     height: calc(200px - 10px - 10px);
 }

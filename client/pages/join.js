@@ -9,7 +9,7 @@ class Join extends Component {
   render() {
     return(
       <Layout title={'Join to our universe'}>
-        <div className={login.loginModuleWrapper}>
+        <div>
           <div className={login.loginInputBox}>
             <div className={login.loginEachInput}>
                 <input className="inputInfo" maxLength="20" placeholder="계정이름"/>
@@ -17,10 +17,13 @@ class Join extends Component {
 
             <div className={login.loginEachInput}>
               <input className="inputInfo" type="password" maxLength="20" placeholder="비밀번호"/>
-              {/* <FontAwesomeIcon icon={faEye}/> */}
             </div>
+            <div className={login.loginEachInput}>
+              <input className="inputInfo" type="password" maxLength="20" placeholder="비밀번호 확인"/>
+            </div>
+
             <div className={login.loginButton}> 
-              <button>로그인</button>
+              <button>회원가입</button>
             </div>
           </div>
         </div>
