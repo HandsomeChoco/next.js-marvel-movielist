@@ -6,14 +6,13 @@ request(url, (error, response, body) => {
     if (error) throw error;
     
     let $ = cheerio.load(body);
-    
     try {
         let director = [];
         let casting = [];
         let year = 0;
         let runningTime = 0;
-        let html = $('wiki-table wiki-dynamic-2b0153ae4e291fa80fa3fdb0e361460f');
-        console.log(html)
+        let data = $("table.wiki-table").html();
+        console.log(data);
     } catch (error) {
         console.log(error);
     }
