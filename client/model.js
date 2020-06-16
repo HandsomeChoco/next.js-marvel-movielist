@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const moment = require('moment');
+var mongoose = require('mongoose');
+var moment = require('moment');
 
-const connectDB = function() {
+var connectDB = function() {
   mongoose.connect('mongodb://localhost:27017/NextApp', {
     useNewUrlParser: true, 
     useUnifiedTopology: true, 
@@ -10,7 +10,7 @@ const connectDB = function() {
   });
 } 
 
-const userSchema = new mongoose.Schema({
+var userSchema = new mongoose.Schema({
   id: { 
     type: String, 
     required: true, 
@@ -74,24 +74,26 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const movieSchema = new mongoose.Schema({
-  krTitle: { type: String, required: true },
-  enTitle: { type: String, required: true },
+var movieSchema = new mongoose.Schema({
+  title: { type: String, required: true },
   director: { type: [String], required: true },
   casting: { type: [String], required: true },
   year: { type: Date, required: true, default: moment().format('YYYY') },
   score: { type: Number, default: 0 },
   likes: { type: Number, default: 0, index: true },
-  dislikes: { type: Number, default: 0, index: true }
+  dislikes: { type: Number, default: 0, index: true },
+  runningTime: { type: Number, required: true }
 });
 
-const actor = new mongoose.Schema({
+var actorSchema = new mongoose.Schema({
   name: { type: String, required: true },
   role: { type: String, required: true },
   heroName: String,
 })
+
 module.exports = {
     connectDB,
     Users: mongoose.model('Users', userSchema),
     Movies: mongoose.model('Movies', movieSchema),
+    Actor: mongoose.model('Actor', actorSchema)
 }
