@@ -7,15 +7,6 @@ const { connectDB, Users, Movies } = require('../../model');
 connectDB();
 
 router.get('/', async (req, res, next) => {
-  fs.readdir('./../client/public/imgs', 'utf-8', (err, data) => {
-    if(err) {
-      throw err;
-    }
-    data.map(name => {
-      Movies.create({ title: name });
-    });
-  });
-  res.send('done')
 });
 
 router.get('/title/:title', async (req, res, next) => {

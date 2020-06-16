@@ -85,6 +85,11 @@ const movieSchema = new mongoose.Schema({
   dislikes: { type: Number, default: 0, index: true }
 });
 
+const actor = new mongoose.Schema({
+  name: { type: String, required: true },
+  role: { type: String, required: true },
+  heroName: String,
+})
 module.exports = {
     connectDB,
     Users: mongoose.model('Users', userSchema),
