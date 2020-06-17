@@ -4,6 +4,7 @@ import Layout from '../components/Layout'
 import login from './login.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import Link from 'next/link';
 
 class Login extends Component {
@@ -23,7 +24,7 @@ class Wrapper extends Component {
     return(
       <div className={login.wrapper}>
         <LoginInputBox/>
-        <LoginOption/>
+        <LoginOption icons={'1234', '12345'}/>
       </div>
     );
   }
@@ -43,14 +44,7 @@ class LoginInputBox extends Component {
           <div className={login.loginButton}> 
             <button>로그인</button>
           </div>
-          <div>
-            <Link href="/join">
-              <a><span>회원 가입</span></a>
-            </Link>
-            <Link href="/find_account">
-              <a><span>계정 찾기</span></a>
-            </Link>   
-          </div>
+          
         </div>
       </div>
     );
@@ -58,10 +52,28 @@ class LoginInputBox extends Component {
 }
 
 class LoginOption extends Component {
+  getSocialLoginButton() {
+    this.props.icons.map((data, index) => {
+      return(
+        <div key={index}>
+          <FontAwesomeIcon icon={data}/>
+        </div>  
+      );
+    })
+  }
   render() {
+
     return(
       <div className={login.loginOption}>
-        1234
+        <div>
+            <Link href="/join">
+              <a><span>회원 가입</span></a>
+            </Link>
+            <Link href="/find_account">
+              <a><span>계정 찾기</span></a>
+            </Link>   
+            { this.props.icons ? this.getSocialLoginButton() : '' }
+          </div>
       </div>
     );
   }

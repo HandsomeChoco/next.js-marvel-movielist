@@ -32,8 +32,15 @@
 }
 
 .loginOption {
-    background-color: #999999;
+    background-color: #ed1d24;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+.loginOption > div > a {
+    text-decoration: none;
+    color: white;
 }
 .loginEachInput {
     border-radius: 3px;
