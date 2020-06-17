@@ -35,6 +35,7 @@
 }
   
 .content {
+    top: 50;
     min-height: calc(100vh);
     padding: 60px 10px 10px 10px;
 }

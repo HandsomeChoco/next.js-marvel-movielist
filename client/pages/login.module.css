@@ -1,15 +1,23 @@
-.loginModuleWrapper {
+.loginInputBoxWrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: auto;
-    width: 1fr;
+    width: 700px;
     height: 288px;
+    margin: auto;
     background-repeat: no-repeat;
     background-position: center;
     background-image: url("../public/loginbackground.jpg");
 }
 
+.container {
+    top: 50px;
+    height: calc(100vh - 50px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 .loginInputBox {
     display: grid;
     row-gap: 5px;
@@ -21,6 +29,11 @@
     color: white;
     border: none;
     background-color: #ed1d24;
+}
+
+.loginOption {
+    background-color: #999999;
+    display: flex;
 }
 .loginEachInput {
     border-radius: 3px;
