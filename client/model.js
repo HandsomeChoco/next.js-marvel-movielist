@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
-var moment = require('moment');
+const mongoose = require('mongoose');
+const moment = require('moment');
 
-var connectDB = function() {
+const connectDB = function() {
   mongoose.connect('mongodb://localhost:27017/NextApp', {
     useNewUrlParser: true, 
     useUnifiedTopology: true, 
@@ -10,7 +10,7 @@ var connectDB = function() {
   });
 } 
 
-var userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   id: { 
     type: String, 
     required: true, 
@@ -74,7 +74,7 @@ var userSchema = new mongoose.Schema({
   },
 });
 
-var movieSchema = new mongoose.Schema({
+const movieSchema = new mongoose.Schema({
   title: { type: String, required: true },
   director: { type: [String], required: true },
   casting: { type: [String], required: true },
@@ -85,15 +85,9 @@ var movieSchema = new mongoose.Schema({
   runningTime: { type: Number, required: true }
 });
 
-var actorSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  role: { type: String, required: true },
-  heroName: String,
-})
 
 module.exports = {
     connectDB,
-    Users: mongoose.model('Users', userSchema),
-    Movies: mongoose.model('Movies', movieSchema),
-    Actor: mongoose.model('Actor', actorSchema)
+    userSchema,
+    movieSchema
 }

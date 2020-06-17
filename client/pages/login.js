@@ -4,8 +4,10 @@ import Layout from '../components/Layout'
 import login from './login.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faGoogle, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import Link from 'next/link';
+import { icon } from '@fortawesome/fontawesome-svg-core';
+import { render } from 'react-dom';
 
 class Login extends Component {
   render() {
@@ -24,7 +26,7 @@ class Wrapper extends Component {
     return(
       <div className={login.wrapper}>
         <LoginInputBox/>
-        <LoginOption icons={'1234', '12345'}/>
+        <LoginOption icons={faGoogle}/>
       </div>
     );
   }
@@ -51,32 +53,23 @@ class LoginInputBox extends Component {
   }
 }
 
-class LoginOption extends Component {
-  getSocialLoginButton() {
-    this.props.icons.map((data, index) => {
-      return(
-        <div key={index}>
-          <FontAwesomeIcon icon={data}/>
-        </div>  
-      );
-    })
-  }
-  render() {
-
-    return(
-      <div className={login.loginOption}>
+function LoginOption() {
+  return(
+    <div className={login.loginOption}>
+      <div>
+        <Link href="/join">
+          <a><span>회원 가입</span></a>
+        </Link>
+        <Link href="/find_account">
+          <a><span>계정 찾기</span></a>
+        </Link>
         <div>
-            <Link href="/join">
-              <a><span>회원 가입</span></a>
-            </Link>
-            <Link href="/find_account">
-              <a><span>계정 찾기</span></a>
-            </Link>   
-            { this.props.icons ? this.getSocialLoginButton() : '' }
-          </div>
+          <FontAwesomeIcon icon={faGoogle}/>
+          <FontAwesomeIcon icon={faFacebook}/>
+        </div> 
       </div>
-    );
-  }
+    </div>
+  );
 } 
 
 export default Login;
