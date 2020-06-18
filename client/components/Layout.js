@@ -1,7 +1,7 @@
 import style from './layout.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-
+import SideBar from './SideBar';
 import Link from 'next/link';
 import Head from 'next/head';
 function Top({ alt }) {
@@ -17,7 +17,6 @@ function Top({ alt }) {
 }
 
 function Footer({ items }) {
-  
   return(
     <div className={style.footer}>
       <div>
@@ -54,4 +53,4 @@ function Layout({ children, title  }) {
   );
 }
 
-export default Layout
+export default Layout;

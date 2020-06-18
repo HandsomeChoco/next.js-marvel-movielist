@@ -1,9 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { connectDB, movieSchema, userSchema }from '../../../model';
+import { Movie, User, connection } from '../../../model'
 
-connectDB();
-
+connection;
 export default async(req, res) => {
   const { query: { movie } } = req;
-  res.send(`movie: ${movie}`)
+  Movie;
+  var getMovie = await Movie.find({ title: { $regex: movie }})
+  res.json(getMovie);
 }

@@ -1,0 +1,42 @@
+.readTerms {
+    border: 2px solid black;
+    border-radius: 7px;
+    padding: 10px;
+    overflow: auto;
+    height: calc(70vh - 50px);
+    width: 1fr;
+}
+
+.agreement {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: calc(30vh - 90px);
+    text-align: center;
+    
+}
+
+.agreement > div > button {
+    width: 100px;
+    height: 50px;
+    border-radius: 7px;
+    color: white;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.agreement > div {
+    width: 100%;
+}
+.agreement > div > .joinSubmit {
+    background-color: #ed1d24;
+}
+
+.agreement > div > .joinCancel {
+    background-color: #929292;
+}
