@@ -15,10 +15,11 @@ class Home extends React.Component {
   }
   componentDidMount() {
     console.log('mount')
+    this._getMovies();
   }
 
   _callApi = () => {
-    return fetch("http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=f013d6a4c9843733eb242b86c4968d95&movieNm=%EC%96%B4%EB%B2%A4%EC%A0%B8%EC%8A%A4")
+    return fetch("http://localhost:4000/api/movie/아이언맨")
     .then(response => response.json());
   
   }
