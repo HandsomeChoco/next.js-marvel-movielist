@@ -1,10 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { Movie, User, connection } from '../../../model'
 
-connection;
 export default async(req, res) => {
+  console.log('test')
   const { query: { movie } } = req;
-  Movie;
-  var getMovie = await Movie.find({ title: { $regex: movie }})
+
+  var getMovie = await movieModel.movie.find({ title: { $regex: movie }});
+  res.statusCode = 200;
   res.json(getMovie);
 }

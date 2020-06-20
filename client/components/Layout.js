@@ -19,15 +19,15 @@ function Top({ alt }) {
 function Footer({ items }) {
   return(
     <div className={style.footer}>
-      <div>
+      <ul>
         {items.map((data, index) => {
           return(
             <Link href={data} key={index}>
-              <a className="footerLink"><span>{data}</span></a>
+              <a className="footerLink"><li>{data}</li></a>
             </Link>
           );
         })}
-      </div>
+      </ul>
     </div>
   );
 }
