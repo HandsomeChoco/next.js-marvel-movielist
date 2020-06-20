@@ -1,22 +1,23 @@
-const mongoose = require('mongoose');
-const moment = require('moment');
+var Mongoose = require('Mongoose');
+var moment = require('moment');
+var Schema = Mongoose.Schema;
+var connection = new Mongoose.createConnection('mongodb://localhost:27017/NextApp', {
+  useNewUrlParser: true, 
+  useUnifiedTopology: true, 
+  useCreateIndex: true, 
+  useFindAndModify: true
+});
 
-const connectDB = function() {
-  mongoose.connect('mongodb://localhost:27017/NextApp', {
-    useNewUrlParser: true, 
-    useUnifiedTopology: true, 
-    useCreateIndex: true, 
-    useFindAndModify: true,
-  });
-} 
 
-const userSchema = new mongoose.Schema({
+
+
+
+var User = new Mongoose.model('User', new Schema({
   id: { 
     type: String, 
     required: true, 
     unique: true,  
     trim: true, 
-    index: true,
     minlength: 5, 
     maxlength: 16,
   },
@@ -30,7 +31,6 @@ const userSchema = new mongoose.Schema({
     required: true, 
     trim: true, 
     unique: true, 
-    index: true, 
     match : /.+\@.+@..+/ 
   }, 
   role: {
@@ -72,22 +72,22 @@ const userSchema = new mongoose.Schema({
     min: 0, 
     max: 150 
   },
-});
+}));
 
-const movieSchema = new mongoose.Schema({
+
+var Movie = new Mongoose.model('Movie', new Schema({
   title: { type: String, required: true },
   director: { type: [String], required: true },
   casting: { type: [String], required: true },
   year: { type: Date, required: true, default: moment().format('YYYY') },
   score: { type: Number, default: 0 },
-  likes: { type: Number, default: 0, index: true },
-  dislikes: { type: Number, default: 0, index: true },
+  likes: { type: [String] },
+  dislikes: { type: [String] },
   runningTime: { type: Number, required: true }
-});
-
+}));
 
 module.exports = {
-    connectDB,
-    User: mongoose.model('User', userSchema),
-    Movie: mongoose.model('Movie', movieSchema),
+  connection,
+  User,
+  Movie
 }

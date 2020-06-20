@@ -18,11 +18,6 @@ class Home extends React.Component {
     console.log('mount')
   }
 
-  _callApiAndSetState = () => {
-    
-  }
-
-  
   _renderMovie = () => {
     return(
       <div>

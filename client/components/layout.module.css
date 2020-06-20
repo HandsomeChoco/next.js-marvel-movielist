@@ -47,7 +47,3 @@
     width: 1fr;
     height: calc(200px - 10px - 10px);
 }
-
-.footer ul {
-    display: flex;
-}

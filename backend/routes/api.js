@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+<<<<<<< HEAD
 const { connectDB, user, movie } = require('../model');
 
 /* GET users listing. */
@@ -28,6 +29,12 @@ router.get('/movie/:name', async(req, res, next) => {
 
 router.get('/user', async(req, res, next) => {
   res.send('api/user')
+=======
+const { connectDB, User, Movie } = require('../model')
+/* GET users listing. */
+router.get('/', function(req, res, next) {
+  res.send('respond with a resource');
+>>>>>>> parent of e174497... 백엔드 드디어 된다
 });
 
 module.exports = router;
