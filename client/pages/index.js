@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Layout from '../components/Layout';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { response } from 'express';
 
 class Home extends React.Component {
   constructor(props) {
@@ -15,19 +16,12 @@ class Home extends React.Component {
   }
   componentDidMount() {
     console.log('mount')
-    this._getMovies();
   }
 
-  _callApi = () => {
-    return fetch("http://localhost:4000/api/movie/아이언맨")
-    .then(response => response.json());
-  
+  _callApiAndSetState = () => {
+    
   }
 
-  _getMovies = async() => {
-    const movies = await this._callApi();
-    this.setState({ movies: movies});
-  }
   
   _renderMovie = () => {
     return(

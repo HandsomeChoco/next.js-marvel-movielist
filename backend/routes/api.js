@@ -1,12 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const { connectDB, user, movie } = require('../model')
+const { connectDB, user, movie } = require('../model');
+
 /* GET users listing. */
 
 connectDB;
 
 router.get('/', async(req, res, next) => {
   res.end('api/');
+});
+
+router.get('/movie', async(req, res, next) => {
+  res.end('api/movie');
 });
 
 
