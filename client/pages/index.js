@@ -4,7 +4,6 @@ import Link from 'next/link';
 import Layout from '../components/Layout';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { response } from 'express';
 
 class Home extends React.Component {
   constructor(props) {
@@ -18,6 +17,17 @@ class Home extends React.Component {
     console.log('mount')
   }
 
+  _callApi = () => {
+    return fetch("http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=f013d6a4c9843733eb242b86c4968d95&movieNm=%EC%96%B4%EB%B2%A4%EC%A0%B8%EC%8A%A4")
+    .then(response => response.json());
+  
+  }
+
+  _getMovies = async() => {
+    const movies = await this._callApi();
+    this.setState({ movies: movies});
+  }
+  
   _renderMovie = () => {
     return(
       <div>
