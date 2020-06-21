@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const { connectDB, user, movie }= require('../model')
 /* GET users listing. */
 
 connectDB;
