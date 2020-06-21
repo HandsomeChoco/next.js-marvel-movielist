@@ -38,6 +38,7 @@
     top: 50;
     min-height: calc(100vh - 70px);
     padding: 60px 10px 10px 10px;
+    background-color: rgb(230, 230, 230);
 }
 
 .footer {

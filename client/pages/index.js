@@ -5,7 +5,7 @@ import Layout from '../components/Layout';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faExternalLinkSquareAlt } from '@fortawesome/free-solid-svg-icons'
 import moment from 'moment';
-import index from './index.module.css'
+import indexCSS from './index.module.css'
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +22,7 @@ class Home extends React.Component {
   }
 
   _callApi = () => {
-    return fetch("http://localhost:4000/api/movie/아이언맨")
+    return fetch("http://10.10.12.3:4000/api/movie")
     .then(response => response.json());
   
   }
@@ -35,13 +35,14 @@ class Home extends React.Component {
   _renderMovies = () => {
     const list = this.state.movies.map((data, index) => {
       return(
-        <Movie
+        <MovieList
           key={index}
+          imageFileName={data.imageFileName}
           movieTitle={data.title}
           year={data.year}
           mainCasting={data.mainCasting}
-          likes={data.like}
-          dislikes={data.dislike}
+          like={data.like.length}
+          dislike={data.dislike.length}
           score={data.score}
           runningTime={data.runningTime}
           degree={data.degree}
@@ -54,7 +55,7 @@ class Home extends React.Component {
   render() {
     return (
       <Layout title={'index'}>
-        <div className={index.movieList}>
+        <div className={indexCSS.movieList}>
           {this.state.movies.length>0 ? this._renderMovies() : 'nothing to render'}
         </div>
       </Layout>
@@ -62,20 +63,45 @@ class Home extends React.Component {
   }
 }
 
-function Movie({ index, movieTitle, year, mainCasting, likes, dislikes, score, runningTime, degree}) {
+function MovieList({ index, imageFileName, movieTitle, year, mainCasting, like, dislike, score, runningTime, degree}) {
   return(
-    <div key={index}>
-      <img src={`/imgs/poster/${movieTitle}.png`} alt={movieTitle} title={movieTitle}/>
+    <div className={indexCSS.movieListItem} key={index}>
+      <img src={`/imgs/poster/${imageFileName}`} alt={movieTitle} title={movieTitle}/>
       <div>
         <h1>{movieTitle} ({year}) </h1>
       </div>
-      <div>
-        <p>주연: {mainCasting}</p>
-      </div>
-      <div>
-        <span>좋아요: {likes}</span> <span>싫어요: {dislikes}</span> <span>평점: {score}</span>
-        <span>상영시간: {runningTime}분</span> <span>등급: {degree}세 관람가</span>
-      </div>
+      <MovieMainCasting
+        mainCasting={ mainCasting }
+      />
+      <MovieTags
+        like={like}
+        dislike={dislike}
+        score={score}
+        runningTime={runningTime}
+        degree={degree}
+      />
+    </div>
+  );
+}
+
+function MovieMainCasting({ mainCasting }) {
+  return(
+    <div>
+        {mainCasting.map((data, index) => {
+          return(
+            <span key={index}>
+              {data}
+            </span>
+          );
+        })}
+    </div>
+  );
+}
+function MovieTags({ like, dislike, score, runningTime, degree}) {
+  return (
+    <div>
+      <span>좋아요: {like}</span> <span>싫어요: {dislike}</span> <span>평점: {score}</span>
+      <span>상영시간: {runningTime}분</span> <span>등급: {degree}세 관람가</span>
     </div>
   );
 }

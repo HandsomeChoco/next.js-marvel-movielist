@@ -9,6 +9,14 @@ router.get('/', async(req, res, next) => {
   res.end('api/');
 });
 
+router.get('/movie/', async(req, res, next) => {
+  const getAllMovie = await movie.find();
+
+  if(getAllMovie.length>=1) {
+    return res.json(getAllMovie);
+  }
+  return res.status(400).send('no result');
+});
 
 router.get('/movie/:name', async(req, res, next) => {
   const movieName = req.params.name;
