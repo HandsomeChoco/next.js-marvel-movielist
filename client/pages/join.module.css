@@ -5,6 +5,7 @@
     overflow: auto;
     height: calc(70vh - 50px);
     width: 1fr;
+    background-color: #ffffff;
 }
 
 .agreement {

@@ -10,7 +10,12 @@ function Top({ alt }) {
       <div>
         <FontAwesomeIcon icon={faBars}/>
       </div>
-      <img src="/MarvelLogo.svg" alt={alt} title={alt}/>
+      <Link href="/">
+        <a>
+          <img src="/MarvelLogo.svg" alt={alt} title={alt}/>
+        </a>
+      </Link>
+      
       <div></div>
     </div>
   );
@@ -45,6 +50,7 @@ function Layout({ children, title  }) {
     <div id={style.container}>
       <Head>
         <title>{title}</title>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap" rel="stylesheet"/>
       </Head>
       <Top alt={'메인으로 이동 합니다.'}/>
       <Content children = {children}/>

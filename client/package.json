@@ -14,11 +14,13 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.10",
     "autoprefixer": "^9.8.0",
+    "axios": "^0.19.2",
     "express": "^4.17.1",
     "moment": "^2.26.0",
     "mongoose": "^5.9.19",
     "next": "9.4.4",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-lines-ellipsis": "^0.14.1"
   }
 }

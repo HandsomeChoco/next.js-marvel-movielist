@@ -1,6 +1,5 @@
 #container {
-    font-family: 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica',
-      'Arial', sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
     max-width: 100vw;
     margin: auto;
 }
@@ -29,7 +28,7 @@
     color: #ffffff;
     vertical-align: middle;
 }
-.nav > img {
+.nav > a > img {
     vertical-align: middle;
     height: 45px;
 }

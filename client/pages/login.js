@@ -64,8 +64,8 @@ function LoginOption() {
           <a><span>계정 찾기</span></a>
         </Link>
         <div>
-          <FontAwesomeIcon icon={faGoogle}/>
-          <FontAwesomeIcon icon={faFacebook}/>
+          {/* <FontAwesomeIcon icon={faGoogle}/>
+          <FontAwesomeIcon icon={faFacebook}/> */}
         </div> 
       </div>
     </div>
