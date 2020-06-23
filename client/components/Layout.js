@@ -4,6 +4,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import SideBar from './SideBar';
 import Link from 'next/link';
 import Head from 'next/head';
+
 function Top({ alt }) {
   return (
     <div className={style.nav}>

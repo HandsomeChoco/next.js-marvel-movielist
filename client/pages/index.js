@@ -26,7 +26,6 @@ class Home extends React.Component {
   _callApi = () => {
     return fetch("http://10.10.12.3:4000/api/movie")
     .then(response => response.json());
-  
   }
 
   _getMovies = async() => {
@@ -53,6 +52,7 @@ class Home extends React.Component {
   }
 
   render() {
+    console.log('Home Component render');
     return (
       <Layout title={'index'}>
         <ul className={indexCSS.movieList}>
@@ -64,6 +64,7 @@ class Home extends React.Component {
 }
 
 function MovieList({ index, imageFileName, movieTitle, mainCasting, score, runningTime, degree}) {
+  console.log('MovieList Component render')
   return(
     <li className={indexCSS.movieListItem} key={index}>
       <MovieImageAndLinkToMovie 
@@ -82,8 +83,9 @@ function MovieList({ index, imageFileName, movieTitle, mainCasting, score, runni
 }
 
 function MovieImageAndLinkToMovie({ movieTitle, imageFileName }) {
+  console.log('MovieImageAndLinkToMovie Component render');
   return(
-    <Link href={movieTitle}>
+    <Link href={`/movie_detail/${movieTitle}`}>
       <a>
         <img src={`/imgs/poster/${imageFileName}`} alt={movieTitle} title={movieTitle}/>
       </a>
@@ -92,6 +94,7 @@ function MovieImageAndLinkToMovie({ movieTitle, imageFileName }) {
 } 
 
 function MovieInfo({ movieTitle }) {
+  console.log('MovieInfo Component render')
   return(
     <div>
       <h1>
@@ -102,6 +105,7 @@ function MovieInfo({ movieTitle }) {
 }
 
 function MovieMainCasting({ mainCasting }) {
+  console.log('MovieMainCasting Component render')
   const iterlateCasting = function() {
     const list = mainCasting.map((data, index) => {
       return(
@@ -121,6 +125,7 @@ function MovieMainCasting({ mainCasting }) {
 }
 
 function MovieTags({ score, runningTime, degree }) {
+  console.log('MovieTags Component render')
   return (
     <div className={indexCSS.movieMetaData}>
       <div>평점: {score}</div> <div>{runningTime}분</div> 

@@ -26,7 +26,6 @@ router.get('/movie/:name', async(req, res, next) => {
     return res.json(getMovie);
   }
   return res.status(400).send('no result');
-  
 });
 
 router.get('/user', async(req, res, next) => {
