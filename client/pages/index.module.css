@@ -44,14 +44,17 @@
     display: grid;
     padding: 5px;
     grid-template-columns: 50% 50%;
-    grid-row-end: 1 / span 2;
 }
 
-.movieMetaData span {
+.movieMetaData div:nth-last-child(1) {
+    grid-column: span 2;
+}
+
+.movieMetaData div {
     padding: 5px;
 }
 
-.movieMetaData span svg {
+.movieMetaData div svg {
     height: 16px;
 }
 .casting {

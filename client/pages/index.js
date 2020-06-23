@@ -43,8 +43,6 @@ class Home extends React.Component {
           movieTitle={data.title}
           year={data.year}
           mainCasting={data.mainCasting}
-          like={data.like.length}
-          dislike={data.dislike.length}
           score={data.score}
           runningTime={data.runningTime}
           degree={data.degree}
@@ -65,7 +63,7 @@ class Home extends React.Component {
   }
 }
 
-function MovieList({ index, imageFileName, movieTitle, year, mainCasting, like, dislike, score, runningTime, degree}) {
+function MovieList({ index, imageFileName, movieTitle, mainCasting, score, runningTime, degree}) {
   return(
     <li className={indexCSS.movieListItem} key={index}>
       <MovieImageAndLinkToMovie 
@@ -74,8 +72,6 @@ function MovieList({ index, imageFileName, movieTitle, year, mainCasting, like, 
       />
       <MovieInfo movieTitle={movieTitle}/>
       <MovieTags
-        like={like}
-        dislike={dislike}
         score={score}
         runningTime={runningTime}
         degree={degree}
@@ -95,14 +91,12 @@ function MovieImageAndLinkToMovie({ movieTitle, imageFileName }) {
   );
 } 
 
-function MovieInfo({ movieTitle}) {
+function MovieInfo({ movieTitle }) {
   return(
     <div>
-      <h1><LinesEllipsis
-        text={movieTitle}
-      /></h1>
-      
-      {/* <div>({moment(year).format('YYYY')})</div> */}
+      <h1>
+        <LinesEllipsis text={movieTitle} />
+      </h1>
     </div>
   );  
 }
@@ -126,11 +120,11 @@ function MovieMainCasting({ mainCasting }) {
   );
 }
 
-function MovieTags({ like, dislike, score, runningTime, degree }) {
+function MovieTags({ score, runningTime, degree }) {
   return (
     <div className={indexCSS.movieMetaData}>
-      <span><FontAwesomeIcon icon={faThumbsUp}/> {like}</span> <span><FontAwesomeIcon icon={faThumbsDown}/> {dislike}</span> <span>평점: {score}</span>
-      <span>상영시간: {runningTime}분</span> <span>등급: {degree}세 관람가</span>
+      <div>평점: {score}</div> <div>{runningTime}분</div> 
+      <div className={indexCSS.degree}>등급: {degree}세 관람가</div>
     </div>
   );
 }
