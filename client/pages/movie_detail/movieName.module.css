@@ -1,5 +1,23 @@
-#content_container {
+#contentContainer {
     border: 1px solid black;
-    height: calc(100vh - 90px);
+    background-color: rgb(49, 49, 49);
     padding: 10px;
+    color: black;
+}
+
+.movieMetaDataWrapper {
+    display: grid;
+    grid-template-areas: "moviePoster movieData";
+    border: 1px solid black;
+    width: 100%;
+    min-height: calc(100vh);
+
+}
+.moviePoster {
+    width: 50%;
+    grid-area: "moviePoster";
+}
+
+.movieData {
+    grid-area: "movieData";
 }

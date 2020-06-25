@@ -96,11 +96,15 @@ function MovieImageAndLinkToMovie({ movieTitle, imageFileName }) {
 function MovieInfo({ movieTitle }) {
   console.log('MovieInfo Component render')
   return(
-    <div>
-      <h1>
-        <LinesEllipsis text={movieTitle} />
-      </h1>
-    </div>
+      <LinesEllipsis 
+        text={movieTitle}
+        maxLine="1"
+        ellipsis=".."
+        trimRight="true"
+        basedOn="letters"
+        component="h1"
+      />
+
   );  
 }
 
