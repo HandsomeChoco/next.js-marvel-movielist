@@ -12,6 +12,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      page: 0,
       movies: []
     }
     this._callApi = this._callApi.bind(this);
@@ -85,7 +86,7 @@ function MovieList({ index, imageFileName, movieTitle, mainCasting, score, runni
 function MovieImageAndLinkToMovie({ movieTitle, imageFileName }) {
   console.log('MovieImageAndLinkToMovie Component render');
   return(
-    <Link href={`/movie_detail/${movieTitle}`}>
+    <Link href={`/movie/${movieTitle}`}>
       <a>
         <img src={`/imgs/poster/${imageFileName}`} alt={movieTitle} title={movieTitle}/>
       </a>

@@ -10,10 +10,15 @@ router.get('/', async(req, res, next) => {
 });
 
 router.get('/movie/', async(req, res, next) => {
-  const getAllMovie = await movie.find();
+  let page = req.params.page;
 
-  if(getAllMovie.length>=1) {
-    return res.json(getAllMovie);
+  //page ? page=Number(page) : page=0;
+  //const getMovies = await movie.find().limit(10).skip(page*10);
+
+  const getMovies = await movie.find();
+
+  if(getMovies.length>=1) {
+    return res.json(getMovies);
   }
   return res.status(400).send('no result');
 });
@@ -21,7 +26,7 @@ router.get('/movie/', async(req, res, next) => {
 router.get('/movie/:name', async(req, res, next) => {
   const movieName = req.params.name;
   const getMovie = await movie.find({ title: { $regex: movieName  }});
-
+  
   if(getMovie.length>=1) {
     return res.json(getMovie);
   }

@@ -1,12 +1,12 @@
 #contentContainer {
     border: 1px solid black;
-    background-color: rgb(49, 49, 49);
     padding: 10px;
     color: black;
 }
 
 .movieMetaDataWrapper {
     display: grid;
+    grid-template-columns: 50% 50%;
     grid-template-areas: "moviePoster movieData";
     border: 1px solid black;
     width: 100%;
@@ -14,10 +14,20 @@
 
 }
 .moviePoster {
-    width: 50%;
     grid-area: "moviePoster";
+    text-align: center;
+    height: 1fr;
+}
+
+.moviePoster img {
+    width: 100%;
 }
 
 .movieData {
     grid-area: "movieData";
+}
+.movieData h1{
+    font-size: 30px;
+    padding: 10px;
+    text-align: center;
 }
