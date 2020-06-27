@@ -4,7 +4,7 @@ export default function Custom404() {
   return(
     <Layout
       title={'페이지를 찾을 수 없습니다. '}
-      children={<NotFound/>}
+      childComponent={<NotFound/>}
     />  
   );
 }

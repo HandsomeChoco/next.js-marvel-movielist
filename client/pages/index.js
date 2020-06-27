@@ -1,15 +1,12 @@
-import React, { Component } from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../components/Layout';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons'
-import moment from 'moment';
 import indexCSS from './index.module.css'
 import LinesEllipsis from 'react-lines-ellipsis'
 
+//정적생성
 export async function getStaticProps(context) {
-  const posts = await fetch("http://10.10.12.3:4000/api/movie").then(response => response.json());
+  const posts = await fetch("http://10.10.12.3:4000/api/movie")
+                .then(response => response.json());
   
   return {
     props: {
@@ -17,7 +14,9 @@ export async function getStaticProps(context) {
     },
   }
 }
+
 function Home({ posts }) {
+
   function _renderMovie () {
     const list = posts.map((data, index) => {
       return(
@@ -36,13 +35,22 @@ function Home({ posts }) {
     return list;
   }
 
-  console.log('Home Component render');
-  return (
-    <Layout title={'index'}>
+  function _renderMovieComponent() {
+    const component = (
       <ul className={indexCSS.movieList}>
         {_renderMovie ? _renderMovie() : 'loading...'}
       </ul>
-    </Layout>
+    )
+    return component;
+  }
+
+  console.log('Home Component render');
+  return (
+    <Layout 
+      title={'index'} 
+      childComponent={ _renderMovieComponent() }
+    />
+      
   );
 }
 

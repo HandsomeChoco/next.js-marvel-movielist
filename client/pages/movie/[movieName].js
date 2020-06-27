@@ -1,16 +1,28 @@
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import movieName from './movieName.module.css';
 
+// export async function getServerSideProps(context) {
+//   const movieName = '아이언맨';
+//   const data = await fetch(`http://10.10.12.3:4000/api/movie/${encodeURIComponent(movieName)}`)
+//                .then(response => response.json());
+//   return {
+//     props: { 
+//       data,
+//     }
+//   }
+// }
+
 const Movie = () => {
   const router = useRouter();
   const { movieName } = router.query;
-  
-
+  const [ movieTitle ] = useState(movieName);
+ 
   return (
     <Layout 
       title={`상세 정보: ${movieName}`}
-      children={<ChildOfLayout children={movieName}/>}
+      childComponent={<ChildOfLayout children={movieName} />}
     />
   );
 }
@@ -26,11 +38,11 @@ function ChildOfLayout({ children }) {
   );
 }
 
-function MoviePoster({children}) {
+function MoviePoster({ children }) {
   return (
     <div className={movieName.moviePoster}>
       <div>
-        <img src="/imgs/poster/아이언맨.png" alt={children} title={children+' 포스터'} />
+        <img src={`/imgs/poster/${children}.png`} alt={children} title={children+' 포스터'} />
       </div>
     </div>
   );

@@ -46,7 +46,7 @@ function Content({ children }) {
   );
 }
 
-function Layout({ children, title  }) {
+function Layout({ childComponent, title  }) {
   return (
     <div id={style.container}>
       <Head>
@@ -54,7 +54,7 @@ function Layout({ children, title  }) {
         <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap" rel="stylesheet"/>
       </Head>
       <Top alt={'메인으로 이동 합니다.'}/>
-      <Content children = {children}/>
+      <Content children = {childComponent}/>
       <Footer items = {[`Terms of Use`, `Privacy Policy`, `Your California Privacy Rights`, `Do Not Sell My Info`, `Children's Online Privacy Policy`, `License Agreement`, `Interest-Based-Ads`, `Marvel Insider Terms`, `©2020 MARVEL`]}/>
     </div>
   );
