@@ -8,34 +8,18 @@ import moment from 'moment';
 import indexCSS from './index.module.css'
 import LinesEllipsis from 'react-lines-ellipsis'
 
-class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      page: 0,
-      movies: []
-    }
-    this._callApi = this._callApi.bind(this);
-    this._getMovies = this._getMovies.bind(this);
-    this._renderMovies = this._renderMovies.bind(this);
-  }
-
-  componentDidMount() {
-    this._getMovies();
-  }
-
-  _callApi = () => {
-    return fetch("http://10.10.12.3:4000/api/movie")
-    .then(response => response.json());
-  }
-
-  _getMovies = async() => {
-    const movies = await this._callApi();
-    this.setState({ movies: movies});
-  }
+export async function getStaticProps(context) {
+  const posts = await fetch("http://10.10.12.3:4000/api/movie").then(response => response.json());
   
-  _renderMovies = () => {
-    const list = this.state.movies.map((data, index) => {
+  return {
+    props: {
+      posts,
+    },
+  }
+}
+function Home({ posts }) {
+  function _renderMovie () {
+    const list = posts.map((data, index) => {
       return(
         <MovieList
           key={index}
@@ -52,16 +36,14 @@ class Home extends React.Component {
     return list;
   }
 
-  render() {
-    console.log('Home Component render');
-    return (
-      <Layout title={'index'}>
-        <ul className={indexCSS.movieList}>
-          {this.state.movies.length>0 ? this._renderMovies() : 'nothing to render'}
-        </ul>
-      </Layout>
-    );
-  }
+  console.log('Home Component render');
+  return (
+    <Layout title={'index'}>
+      <ul className={indexCSS.movieList}>
+        {_renderMovie ? _renderMovie() : 'loading...'}
+      </ul>
+    </Layout>
+  );
 }
 
 function MovieList({ index, imageFileName, movieTitle, mainCasting, score, runningTime, degree}) {
