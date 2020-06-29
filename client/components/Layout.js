@@ -28,7 +28,7 @@ function Footer({ items }) {
       <div>
         {items.map((data, index) => {
           return(
-            <Link href={data} key={index}>
+            <Link href={`/${data}`} key={index}>
               <a className="footerLink"><span>{data}</span></a>
             </Link>
           );

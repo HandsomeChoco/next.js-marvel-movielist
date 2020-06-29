@@ -16,25 +16,20 @@ class Join extends Component {
       isPossibleToAgree: false,
     }
     this._handleTerms = this._handleTerms.bind(this);
-    this._sendJoinRequest = this._sendJoinRequest.bind(this);
-
   }
+  
   _handleTerms() {
     this.setState((state) => {
       return { readTerms: !this.state.readTerms }
     });
   }
-  _sendJoinRequest() {
-    Axios({
-      method: "post",
-      url: "http://10.10.12.3:4000/api/user/"
-    })
-  }
+
   render() {
     return(
-      <Layout title={'Join to our universe'}>
-        {this.state.readTerms===false ? <Terms confirm={this._handleTerms}/> : <JoinForm cancel={this._handleTerms}/> }
-      </Layout>
+      <Layout 
+        title={'Join to our universe'}
+        childComponent={this.state.readTerms===false ? <Terms confirm={this._handleTerms}/> : <JoinForm cancel={this._handleTerms}/> }
+      />
     );
   }
 }

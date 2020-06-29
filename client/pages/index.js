@@ -1,31 +1,30 @@
 import Link from 'next/link';
 import Layout from '../components/Layout';
 import indexCSS from './index.module.css'
-import LinesEllipsis from 'react-lines-ellipsis'
+
 
 //정적생성
 export async function getStaticProps(context) {
-  const posts = await fetch("http://10.10.12.3:4000/api/movie")
+  const movieList = await fetch("http://10.10.12.3:4000/api/movie")
                 .then(response => response.json());
   
   return {
     props: {
-      posts,
+      movieList,
     },
   }
 }
 
-function Home({ posts }) {
+function Home({ movieList }) {
 
   function _renderMovie () {
-    const list = posts.map((data, index) => {
+    const list = movieList.map((data, index) => {
       return(
         <MovieList
           key={index}
           imageFileName={data.imageFileName}
           movieTitle={data.title}
           year={data.year}
-          mainCasting={data.mainCasting}
           score={data.score}
           runningTime={data.runningTime}
           degree={data.degree}
@@ -54,7 +53,7 @@ function Home({ posts }) {
   );
 }
 
-function MovieList({ index, imageFileName, movieTitle, mainCasting, score, runningTime, degree}) {
+function MovieList({ index, imageFileName, movieTitle, score, runningTime, degree}) {
   console.log('MovieList Component render')
   return(
     <li className={indexCSS.movieListItem} key={index}>
@@ -68,7 +67,6 @@ function MovieList({ index, imageFileName, movieTitle, mainCasting, score, runni
         runningTime={runningTime}
         degree={degree}
       />
-      <MovieMainCasting mainCasting={ mainCasting }/>
     </li>
   );
 }
@@ -87,36 +85,8 @@ function MovieImageAndLinkToMovie({ movieTitle, imageFileName }) {
 function MovieInfo({ movieTitle }) {
   console.log('MovieInfo Component render')
   return(
-      <LinesEllipsis 
-        text={movieTitle}
-        maxLine="1"
-        ellipsis=".."
-        trimRight="true"
-        basedOn="letters"
-        component="h1"
-      />
-
+      <h1>{movieTitle}</h1>
   );  
-}
-
-function MovieMainCasting({ mainCasting }) {
-  console.log('MovieMainCasting Component render')
-  const iterlateCasting = function() {
-    const list = mainCasting.map((data, index) => {
-      return(
-        <span key={index}>
-          {data}
-        </span>
-      );
-    });
-    return list;
-  }
-
-  return(
-    <div className={indexCSS.casting}>
-      {iterlateCasting()}
-    </div>
-  );
 }
 
 function MovieTags({ score, runningTime, degree }) {

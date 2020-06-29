@@ -12,11 +12,10 @@ import { render } from 'react-dom';
 class Login extends Component {
   render() {
     return(
-      <Layout title={'Login to this page'}>
-        <div className={login.container}>
-          <Wrapper/>
-        </div>
-      </Layout>
+      <Layout 
+        title={'Login to this page'}
+        childComponent={<Wrapper/>}
+      />
     );
   }
 }
@@ -24,9 +23,11 @@ class Login extends Component {
 class Wrapper extends Component {
   render() {
     return(
-      <div className={login.wrapper}>
-        <LoginInputBox/>
-        <LoginOption icons={faGoogle}/>
+      <div className={login.container}>
+        <div className={login.wrapper}>
+          <LoginInputBox/>
+          <LoginOption icons={faGoogle}/>
+        </div>
       </div>
     );
   }
