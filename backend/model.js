@@ -22,13 +22,14 @@ const userSchema = new mongoose.Schema({
 
 const movieSchema = new mongoose.Schema({
     title: { type: String, required: true },
+    enTitle: { type: String, required: true },
     director: { type: [String], required: true},
     mainCasting: { type: [String], requried: true },
     casting: { type: [String], required: true},
     year: { type: Date,  required: true },
     score: { type: Number, required:true, default: 0 },
-    like: { type: [String], default: [] },
-    dislike: { type: [String], default: [] },
+    likes: { type: [String], default: [] },
+    dislikes: { type: [String], default: [] },
     runningTime: { type: Number, required: true },
     degree: { type: Number, required: true }
 })

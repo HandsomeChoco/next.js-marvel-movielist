@@ -24,10 +24,6 @@ function Home({ movieList }) {
           key={index}
           imageFileName={data.imageFileName}
           movieTitle={data.title}
-          year={data.year}
-          score={data.score}
-          runningTime={data.runningTime}
-          degree={data.degree}
         />
       );
     })
@@ -53,7 +49,7 @@ function Home({ movieList }) {
   );
 }
 
-function MovieList({ index, imageFileName, movieTitle, score, runningTime, degree}) {
+function MovieList({ index, imageFileName, movieTitle }) {
   console.log('MovieList Component render')
   return(
     <li className={indexCSS.movieListItem} key={index}>
@@ -61,12 +57,7 @@ function MovieList({ index, imageFileName, movieTitle, score, runningTime, degre
         movieTitle={movieTitle} 
         imageFileName={imageFileName}
       />
-      <MovieInfo movieTitle={movieTitle}/>
-      <MovieTags
-        score={score}
-        runningTime={runningTime}
-        degree={degree}
-      />
+      <h1>{movieTitle}</h1>
     </li>
   );
 }
@@ -82,21 +73,6 @@ function MovieImageAndLinkToMovie({ movieTitle, imageFileName }) {
   );
 } 
 
-function MovieInfo({ movieTitle }) {
-  console.log('MovieInfo Component render')
-  return(
-      <h1>{movieTitle}</h1>
-  );  
-}
 
-function MovieTags({ score, runningTime, degree }) {
-  console.log('MovieTags Component render')
-  return (
-    <div className={indexCSS.movieMetaData}>
-      <div>평점: {score}</div> <div>{runningTime}분</div> 
-      <div className={indexCSS.degree}>등급: {degree}세 관람가</div>
-    </div>
-  );
-}
 
 export default Home;

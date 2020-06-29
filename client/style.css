@@ -109,8 +109,7 @@ table {
 }
 
 /* 영화 등급 아이콘 */
-._12 {
-    background-color: #22a2dc;
+.degree  {
     color: black;
     width: 30px;
     height: 30px;
@@ -122,45 +121,17 @@ table {
     align-items: center;
     margin: 0px 5px;
 }
-
+._12 {
+    background-color: #22a2dc;
+}
 ._15 {
     background-color: #efa126;
-    color: black;
-    width: 30px;
-    height: 30px;
-    border-radius: 100%;
-    font-size: 15px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0px 5px;
 }
 
 ._18 {
     background-color: #cb2126;
-    color: black;
-    width: 30px;
-    height: 30px;
-    border-radius: 100%;
-    font-size: 15px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0px 5px;
 }
 
 ._all {
     background-color: #3fa449;
-    color: black;
-    width: 30px;
-    height: 30px;
-    border-radius: 100%;
-    font-size: 15px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0px 5px;
 }

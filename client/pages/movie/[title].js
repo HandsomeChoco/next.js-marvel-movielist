@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import titleCSS from './title.module.css';
+import moment from 'moment';
 
 export async function getServerSideProps(context) {
   const data = await fetch(`http://10.10.12.3:4000/api/movie/${encodeURIComponent(context.params.title)}`)
@@ -23,67 +25,116 @@ const Movie = ( data ) => {
       title={`상세 정보: ${title}`}
       childComponent={
         <ChildOfLayout 
-          children={movieData.title} 
-          path={movieData.imageFileName}
-          degree={movieData.degree}
+          titleProp={movieData.title}
+          enTitleProp={movieData.enTitle}
+          yearProp={movieData.year}
+          pathProp={movieData.imageFileName}
+          degreeProp={movieData.degree}
+          directorProp={movieData.director}
+          likesProp={movieData.likes.length}
+          dislikesProp={movieData.dislikes.length}
+          scoreProp={movieData.score}
+          runTimeProp={movieData.runningTime}
+          castingProp={movieData.casting}
+          dateProp={movieData.year}
         />
       }
     />
   );
 }
 
-function ChildOfLayout({ children, path, degree }) {
+function ChildOfLayout({ titleProp, enTitleProp, yearProp, pathProp, degreeProp, directorProp, likesProp, dislikesProp, scoreProp, runTimeProp, castingProp }) {
   return(
     <div id={titleCSS.contentContainer}>
       <div className={titleCSS.movieMetaDataWrapper}>
-        <MoviePoster movieTitle={children} path={path}/>
+        <MoviePoster _movieTitle={titleProp} _path={pathProp}/>
         <MovieInfo 
-          children={children} 
-          degreeIcon={degree}
+          _title={titleProp} 
+          _enTitle={enTitleProp}
+          _year={yearProp}
+          _degreeIcon={degreeProp}
+          _director={directorProp}
+          _likesCount={likesProp}
+          _dislikesCount={dislikesProp}
+          _score={scoreProp}
+          _runningTime={runTimeProp}
+          _casting={castingProp}
         />
       </div>
     </div>
   );
 }
 
-function MoviePoster({ path, movieTitle }) {
+function MoviePoster({ _path, _movieTitle }) {
   return (
     <div className={titleCSS.moviePoster}>
       <div>
-        <img src={`/imgs/poster/${path}`} alt={movieTitle} title={movieTitle+' 포스터'} />
+        <img src={`/imgs/poster/${_path}`} alt={_movieTitle} title={_movieTitle+' 포스터'} />
       </div>
     </div>
   );
 }
 
-// degreeIcon 의 css 는 글로벌 스타일에 적용되어 있음.
-function MovieInfo({ children, degreeIcon, likesCount, dislikesCount, scoreData, castingData }) {
+// degreeIcon 의 css 는 글로벌 스타일에 _12, _15, _18, _all 로 정의되어 있음.
+function MovieInfo({ _title, _enTitle, _year, _degreeIcon, _director, _likesCount, _dislikesCount, _score, _runningTime, _casting }) {
   return(
     <div className={titleCSS.movieData}>
-      <div>
-        <h1>
-          <div className={'_'+degreeIcon}>
-            <span>{degreeIcon}</span>
-          </div>   {children}
-        </h1>
-      </div>
+      <MovieTitleAndDegree
+        __degreeIcon={_degreeIcon}
+        __title={_title}
+        __enTitle={_enTitle}
+        __year={_year}
+      />
       <MovieMetaData
-        likes={likesCount}
-        dislikes={dislikesCount}
-        score={scoreData}
-        casting={castingData}
+        __likes={_likesCount}
+        __dislikes={_dislikesCount}
+        __director={_director}
+        __score={_score}
+        __runningTime={_runningTime}
+        __casting={_casting}
       />
     </div>
   );
 }
 
-function MovieMetaData({ likes, dislikes, score, casting }) {
+function MovieTitleAndDegree({ __degreeIcon, __title, __enTitle, __year }) {
   return(
     <div>
-      <div>좋아요: {likes}</div>
-      <div>싫어요: {dislikes}</div>
-      <div>평점: {score}</div>
-      <div>출연진: {casting}</div>
+      <h1>
+        <div className={"degree " + "_" + __degreeIcon}>
+          <span>{__degreeIcon}</span>
+        </div>   
+        {__title}
+      </h1>
+      <div className={titleCSS.subTitle}>
+        {__enTitle}, {moment(__year).format('YYYY')}
+      </div>
+    </div>
+  );
+}
+
+function MovieMetaData({ __likes, __dislikes, __director, __score, __runningTime, __casting }) {
+  function loopList(prop) {
+    const list = prop.map((data, index) => {
+      return(
+        <Link href={`/actor/${data}`} key={index}>
+          <a className={titleCSS.casting}>
+            <li>{data}</li>
+          </a>
+        </Link>
+      );
+    })
+    return list;
+  }
+  
+  return(
+    <div className={titleCSS.movieMetaData}>
+      <div>감독: <ul>{loopList(__director)}</ul></div>
+      <div>좋아요: {__likes}</div>
+      <div>싫어요: {__dislikes}</div>
+      <div>평점: {__score}</div>
+      <div>상영시간: {__runningTime}분</div>
+      <div>출연진: <ul>{loopList(__casting)}</ul></div>
     </div>
   );
 }
