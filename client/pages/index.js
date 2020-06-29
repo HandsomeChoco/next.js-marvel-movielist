@@ -2,8 +2,6 @@ import Link from 'next/link';
 import Layout from '../components/Layout';
 import indexCSS from './index.module.css'
 
-
-//정적생성
 export async function getStaticProps(context) {
   const movieList = await fetch("http://10.10.12.3:4000/api/movie")
                 .then(response => response.json());

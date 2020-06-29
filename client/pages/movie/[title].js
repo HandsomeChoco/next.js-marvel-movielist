@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
@@ -98,18 +97,19 @@ function MovieInfo({ _title, _enTitle, _year, _degreeIcon, _director, _likesCoun
 }
 
 function MovieTitleAndDegree({ __degreeIcon, __title, __enTitle, __year }) {
+  const year = moment(__year).format('YYYY');
   return(
-    <div>
-      <h1>
-        <div className={"degree " + "_" + __degreeIcon}>
-          <span>{__degreeIcon}</span>
-        </div>   
+    <>
+      <h1> 
+        <span className={"degree " + "_" + __degreeIcon}>
+          {__degreeIcon}
+        </span> 
         {__title}
       </h1>
       <div className={titleCSS.subTitle}>
-        {__enTitle}, {moment(__year).format('YYYY')}
+        {__enTitle}, {year}
       </div>
-    </div>
+    </>
   );
 }
 

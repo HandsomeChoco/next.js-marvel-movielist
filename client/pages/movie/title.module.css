@@ -56,8 +56,20 @@
     text-decoration: underline;
 }
 
+.degreeIconWrapper {
+    width: 30px;
+    height: 30px;
+}
 @media screen and (max-width: 500px) {
     .movieMetaDataWrapper {
         grid-template-columns: 100%;
+    }
+
+    .movieData {
+        padding: 0px;
+    }
+
+    .movieData h1 {
+        font-size: 20px;
     }
 }

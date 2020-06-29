@@ -7,7 +7,7 @@ import Head from 'next/head';
 
 function Top({ alt }) {
   return (
-    <div className={style.nav}>
+    <nav className={style.nav}>
       <div>
         <FontAwesomeIcon icon={faBars}/>
       </div>
@@ -18,23 +18,23 @@ function Top({ alt }) {
       </Link>
       
       <div></div>
-    </div>
+    </nav>
   );
 }
 
 function Footer({ items }) {
   return(
-    <div className={style.footer}>
+    <footer className={style.footer}>
       <div>
         {items.map((data, index) => {
           return(
-            <Link href={`/${data}`} key={index}>
+            <Link href={data} key={index}>
               <a className="footerLink"><span>{data}</span></a>
             </Link>
           );
         })}
       </div>
-    </div>
+    </footer>
   );
 }
 

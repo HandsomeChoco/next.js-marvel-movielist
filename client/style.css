@@ -93,6 +93,7 @@ table {
 }
 
 /* global CSS*/
+
 .inputInfo {
     height: 34px;
     width: 250px;
@@ -110,16 +111,15 @@ table {
 
 /* 영화 등급 아이콘 */
 .degree  {
-    color: black;
-    width: 30px;
-    height: 30px;
-    border-radius: 100%;
-    font-size: 15px;
-    font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0px 5px;
+    color: white;
+    width: calc(30px);
+    height: calc(30px);
+    border-radius: 100%;
+    font-size: 15px;
+    font-weight: bold;
 }
 ._12 {
     background-color: #22a2dc;
@@ -134,4 +134,12 @@ table {
 
 ._all {
     background-color: #3fa449;
+}
+
+@media screen and (max-width: 500px) {
+    .degree {
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+    }
 }
