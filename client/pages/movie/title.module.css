@@ -69,7 +69,6 @@
 .directorList, .castingList {
     overflow: auto;
     display: flex;
-    border: 1px solid black;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
@@ -81,9 +80,9 @@
     white-space: nowrap;
 }
 
-/* .directorList::-webkit-scrollbar, .castingList::-webkit-scrollbar {
+.directorList::-webkit-scrollbar, .castingList::-webkit-scrollbar {
     display: none;
-} */
+}
 .actor {
     width: 111px;
 }
@@ -113,5 +112,9 @@
 
     .movieData h1 {
         font-size: 20px;
+    }
+
+    .movieMetaData { 
+        padding: 10px 0px;
     }
 }

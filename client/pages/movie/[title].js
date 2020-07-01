@@ -114,19 +114,22 @@ function MovieTitleAndDegree({ __degreeIcon, __title, __enTitle, __year }) {
 }
 
 function MovieMetaData({ __likes, __dislikes, __director, __score, __runningTime, __casting }) {
-  function loopList(prop, path) {
+  function loopListWithPicOrNot(prop, renderImage) {
     
     const list = prop.map((data, index) => {
       return(
-        <Link href={`/${path}/${data}`} key={index}>
+        <Link href={`/actor/${data}`} key={index}>
           <a className={titleCSS.casting}>
             <li>
               <div>
-                <img 
-                  alt={data} 
-                  src={`/imgs/${path}/${data}.jfif`} 
-                  className={titleCSS.profilePic}
-                />
+                {renderImage ? 
+                  <img 
+                    alt={data} 
+                    src={`/imgs/actor/${data}.jfif`} 
+                    className={titleCSS.profilePic}
+                  /> : null
+                }
+                
                 <div className={titleCSS.actorName} title={data}>
                   {data}
                 </div>
@@ -142,12 +145,12 @@ function MovieMetaData({ __likes, __dislikes, __director, __score, __runningTime
   
   return(
     <div className={titleCSS.movieMetaData}>
-      <div>감독: <ul className={titleCSS.directorList}>{loopList(__director, 'actor')}</ul></div>
-      <div>좋아요: {__likes}</div>
-      <div>싫어요: {__dislikes}</div>
+      <div>감독: <ul className={titleCSS.directorList}>{loopListWithPicOrNot(__director)}</ul></div>
+      <div>좋아요: {__likes} 싫어요: {__dislikes}</div>
+      <div></div>
       <div>평점: {__score}</div>
       <div>상영시간: {__runningTime}분</div>
-      <div>출연진: <ul className={titleCSS.castingList}>{loopList(__casting, 'actor')}</ul></div>
+      <div>출연진: <ul className={titleCSS.castingList}>{loopListWithPicOrNot(__casting, true)}</ul></div>
     </div>
   );
 }
