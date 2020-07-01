@@ -11,17 +11,37 @@
 }
 .wtf {
     border: 3px solid black;
-    width: calc(300px);
-    height: calc(300px);
+    width: calc(294px);
+    height: calc(294px);
     object-fit: cover;
     object-position: 40% top;
     border-radius: 100%;
     -webkit-box-shadow: 2px 2px 15px 2px rgba(100, 100, 100, 0.75);
     -moz-box-shadow: 2px 2px 15px 2px rgba(100, 100, 100, 0.75);
     box-shadow: 2px 2px 15px 2px rgba(100,100,100,0.75);
+    
 }
 
 .notFoundWrapper h1 {
-    padding: 10px;
-    font-size: 30px;
+    font-weight: bold;
+}
+.errorMessage {
+    padding: 20px;
+    font-size: 25px;
+}
+
+.statusCode {
+    font-size: 50px;
+    padding-bottom: 20px;
+}
+
+@media screen and (max-width: 480px) {
+    .wtf {
+        width: calc(60vw - 6px);
+        height: calc(60vw - 6px);
+    }
+    .errorMessage {
+        font-size: 20px;
+        text-align: center;
+    }
 }

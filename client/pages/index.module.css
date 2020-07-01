@@ -6,8 +6,8 @@
 
 .movieList {
     display: grid;
-    grid-template-columns: repeat(5, calc(20% - 12px));
-    grid-gap: 15px;
+    grid-template-columns: repeat(4, calc(25% - 8px));
+    grid-gap: 10px;
 }
 
 .movieList img {
@@ -66,29 +66,30 @@
     height: 16px;
 }
 
-@media screen and (max-width: 1250px) {
+@media screen and (max-width: 1024px) {
     .movieList {
-        grid-template-columns: repeat(4, calc(25% - 12px));
-    }
-}
-
-@media screen and (max-width: 1000px) {
-    .movieList {
-        grid-template-columns: repeat(3, calc(33% - 6px));
-        grid-gap: 12px;
+        grid-template-columns: repeat(4, calc(25% - 8px));
+        grid-gap: 10px;
     }
 }
 
 @media screen and (max-width: 768px) {
+    .movieList {
+        grid-template-columns: repeat(3, calc(33% - 5px));
+        grid-gap: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
     .movieList {
         grid-template-columns: repeat(2, calc(50% - 5px));
         grid-gap: 10px;
     }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 360px) {
     .movieList {
-        grid-template-columns: calc(100% - 10px);
+        grid-template-columns: calc(100%);
         grid-gap: 10px;
     }
 }

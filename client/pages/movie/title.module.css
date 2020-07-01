@@ -9,7 +9,7 @@
 
 .movieMetaDataWrapper {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 350px 1fr;
     width: 100%;
     min-height: calc(100vh);
 
@@ -36,7 +36,8 @@
     border-bottom: 1px solid #e0e0e0;
 }
 .movieData {
-    padding: 10px;
+    width: 100%;
+    overflow: auto;
 }
 .movieData h1{
     font-weight: bold;
@@ -46,6 +47,9 @@
     justify-content: center;
 }
 
+.movieMetaData {
+    padding: 10px;
+}
 .casting {
     text-decoration: none;
     padding: 2.5px;
@@ -60,7 +64,45 @@
     width: 30px;
     height: 30px;
 }
-@media screen and (max-width: 500px) {
+
+
+.directorList, .castingList {
+    overflow: auto;
+    display: flex;
+    border: 1px solid black;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.actorName {
+    width: 111px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* .directorList::-webkit-scrollbar, .castingList::-webkit-scrollbar {
+    display: none;
+} */
+.actor {
+    width: 111px;
+}
+@media screen and (max-width: 768px) {
+    .movieMetaDataWrapper {
+        grid-template-columns: 50% 50%;
+    }
+
+    .movieData {
+        padding: 0px;
+    }
+
+    .movieData h1 {
+        font-size: 20px;
+    }
+}
+
+/* style.css 에서 degree 도 바꿔야 함*/
+@media screen and (max-width: 480px) {
     .movieMetaDataWrapper {
         grid-template-columns: 100%;
     }
