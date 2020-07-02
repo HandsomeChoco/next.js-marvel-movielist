@@ -14,57 +14,87 @@ class Join extends Component {
     this.state = {
       readTerms: false,
       isPossibleToAgree: false,
+      terms: '',
     }
     this._handleTerms = this._handleTerms.bind(this);
+    this._loadTerms = this._loadTerms.bind(this);
   }
   
+  componentDidMount() {
+    this._loadTerms();
+  }
+
   _handleTerms() {
     this.setState((state) => {
       return { readTerms: !this.state.readTerms }
     });
   }
 
+  _callTermAPI() {
+    return fetch('http://10.10.12.3:4000/api/policy/join_term')
+                 .then(response => response.json());
+  }
+
+  _loadTerms = async() => {
+    const terms = await this._callTermAPI();
+    this.setState({
+      terms: terms 
+    });
+  }
+  
   render() {
+    const joinReq = {
+      method: "post",
+      url: "http://10.10.12.3:4000/api/login",
+      id: 'test',
+      password: 'test'
+    }
     return(
       <Layout 
         title={'Join to our universe'}
-        childComponent={this.state.readTerms===false ? <Terms confirm={this._handleTerms}/> : <JoinForm cancel={this._handleTerms}/> }
+        childComponent={this.state.readTerms===false ? 
+          <Terms handleState={this._handleTerms} getTermsProp={this.state.terms}/> : 
+          <JoinForm _cancel={this._handleTerms}/> }
       />
     );
   }
 }
 
-function JoinForm({ cancel }) {
+function JoinForm({ _handleSendReq, _cancel }) {
   return(
     <div>
       <div className={login.loginInputBox}>
-        <div className={login.loginEachInput}>
-            <input className="inputInfo" maxLength="20" placeholder="계정이름"/>
-        </div>
+        <form method="post">
+          <div className={login.loginEachInput}>
+              <input className="inputInfo" maxLength="20" placeholder="계정이름"/>
+          </div>
 
-        <div className={login.loginEachInput}>
-          <input className="inputInfo" type="password" maxLength="20" placeholder="비밀번호"/>
-        </div>
-        <div className={login.loginEachInput}>
-          <input className="inputInfo" type="password" maxLength="20" placeholder="비밀번호 확인"/>
-        </div>
+          <div className={login.loginEachInput}>
+            <input className="inputInfo" type="password" maxLength="20" placeholder="비밀번호"/>
+          </div>
+          <div className={login.loginEachInput}>
+            <input className="inputInfo" type="password" maxLength="20" placeholder="비밀번호 확인"/>
+          </div>
 
-        <div className={login.loginButton}> 
-          <button>회원가입</button>
-          <button className={login.returnButton}
-            onClick={cancel}
-          >약관으로 돌아가기</button>
-        </div>
+          <div className={login.loginButton}> 
+            <button onClick={_handleSendReq}>회원가입</button>
+            <button 
+              className={login.returnButton}
+              onClick={_cancel}
+            >약관으로 돌아가기</button>
+          </div>
+        </form>
+
       </div>
     </div>
   );
 }
 
-function Terms({ confirm }) {
+function Terms({ handleState, getTermsProp }) {
   return(
     <div>
       <div className={join.readTerms}>
-        이용 약관 블라블라 (API로 바꿀 예정)
+        { getTermsProp ? getTermsProp : 'loading...' }
       </div>
       <div>
         <label>
@@ -75,7 +105,7 @@ function Terms({ confirm }) {
         <div>
           <button
             className={join.joinSubmit} 
-            onClick={confirm}
+            onClick={handleState}
           >확인</button> 
           <button 
             className={join.joinCancel}

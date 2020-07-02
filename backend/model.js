@@ -34,8 +34,13 @@ const movieSchema = new mongoose.Schema({
     degree: { type: Number, required: true }
 })
 
+const policySchema = new mongoose.Schema({
+    content: { type: String, required: true, },
+    key: { type: String, required: true, unique: true }
+})
 module.exports = {
     connectDB,
     user: mongoose.model('user', userSchema),     
-    movie: mongoose.model('movie', movieSchema)
+    movie: mongoose.model('movie', movieSchema),
+    policy: mongoose.model('policy', policySchema)
 }

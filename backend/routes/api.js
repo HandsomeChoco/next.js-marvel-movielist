@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { connectDB, user, movie }= require('../model')
+const { connectDB, user, movie, policy }= require('../model')
 /* GET users listing. */
 
 connectDB;
@@ -47,4 +47,16 @@ router.get('/user', async(req, res, next) => {
   res.send('api/user')
 });
 
+
+router.get('/policy/:key', async(req, res, next) => {
+  const key = req.params.key;
+  console.log(key)
+  
+  const getPolicy = await policy.findOne({ key: key });
+  if(getPolicy) {
+    return res.json(getPolicy.content);
+  }
+
+  return res.status(400).send('');
+});
 module.exports = router;
