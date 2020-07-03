@@ -1,13 +1,8 @@
-import Head from 'next/head';
 import React, { Component } from 'react';
 import Layout from '../components/Layout'
 import login from './login.module.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faGoogle, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import Link from 'next/link';
-import { icon } from '@fortawesome/fontawesome-svg-core';
-import { render } from 'react-dom';
 
 class Login extends Component {
   render() {

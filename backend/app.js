@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('api/movie/:name', (cors(corsOption), async(req, res, next) => { }));
+app.get('api/', (cors(corsOption), async(req, res, next) => { }));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
