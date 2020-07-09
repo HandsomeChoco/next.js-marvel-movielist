@@ -24,40 +24,30 @@ const Movie = ( data ) => {
       title={`상세 정보: ${title}`}
       childComponent={
         <ChildOfLayout 
-          titleProp={movieData.title}
-          enTitleProp={movieData.enTitle}
-          yearProp={movieData.year}
-          pathProp={movieData.imageFileName}
-          degreeProp={movieData.degree}
-          directorProp={movieData.director}
-          likesProp={movieData.likes.length}
-          dislikesProp={movieData.dislikes.length}
-          scoreProp={movieData.score}
-          runTimeProp={movieData.runningTime}
-          castingProp={movieData.casting}
-          dateProp={movieData.year}
+          prop={movieData}
         />
       }
     />
   );
 }
 
-function ChildOfLayout({ titleProp, enTitleProp, yearProp, pathProp, degreeProp, directorProp, likesProp, dislikesProp, scoreProp, runTimeProp, castingProp }) {
+
+function ChildOfLayout({ prop }) {
   return(
     <div id={titleCSS.contentContainer}>
       <div className={titleCSS.movieMetaDataWrapper}>
-        <MoviePoster _movieTitle={titleProp} _path={pathProp}/>
+        <MoviePoster _movieTitle={prop.title} _path={prop.imageFileName}/>
         <MovieInfo 
-          _title={titleProp} 
-          _enTitle={enTitleProp}
-          _year={yearProp}
-          _degreeIcon={degreeProp}
-          _director={directorProp}
-          _likesCount={likesProp}
-          _dislikesCount={dislikesProp}
-          _score={scoreProp}
-          _runningTime={runTimeProp}
-          _casting={castingProp}
+          _title={prop.title} 
+          _enTitle={prop.enTitle}
+          _year={prop.year}
+          _degreeIcon={prop.degree}
+          _director={prop.director}
+          _likesCount={prop.likes.length}
+          _dislikesCount={prop.dislikes.length}
+          _score={prop.score}
+          _runningTime={prop.runningTime}
+          _casting={prop.casting}
         />
       </div>
     </div>
