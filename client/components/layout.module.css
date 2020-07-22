@@ -20,11 +20,9 @@
 }
  
 .nav > div > svg {
-    border: 2px solid #ffffff;
     height: 25px;
     width: 25px !important;
-    border-radius: 7px;
-    padding: 2.5px;
+    padding: 5px;
     color: #ffffff;
     vertical-align: middle;
 }

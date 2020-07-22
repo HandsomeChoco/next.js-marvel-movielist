@@ -2,17 +2,14 @@
     background-color: white;
     padding: 10px;
     border: none;
-    -webkit-box-shadow: 2px 4px 10px 0px rgba(100, 100, 100, 0.75);
-    -moz-box-shadow: 2px 4px 10px 0px rgba(100, 100, 100, 0.75);
-    box-shadow: 2px 4px 10px 0px rgba(100,100,100,0.75);
+    -webkit-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.25);
+    box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.25);
 }
 
 .movieMetaDataWrapper {
-    display: grid;
-    grid-template-columns: 350px 1fr;
+    display: flex;
     width: 100%;
-    min-height: calc(100vh);
-
 }
 .moviePoster {
     text-align: center;
@@ -23,16 +20,17 @@
     width: calc(100% - 2px);
     border: 1px solid #d6d6d6;
     border-radius: 7px;
-    -webkit-box-shadow: 2px 2px 15px 2px rgba(100, 100, 100, 0.75);
-    -moz-box-shadow: 2px 2px 15px 2px rgba(100, 100, 100, 0.75);
-    box-shadow: 2px 2px 15px 2px rgba(100,100,100,0.75);
+    -webkit-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.25);
+    box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.25);
 }
+
 .subTitle {
     text-align: center;
     font-size: 12px;
     color: #767676;
     font-weight: bolder;
-    padding-bottom: 10px;
+    padding: 0px 10px 10px 10px;
     border-bottom: 1px solid #e0e0e0;
 }
 .movieData {
@@ -41,7 +39,7 @@
 }
 .movieData h1{
     font-weight: bold;
-    padding: 10px 0px;
+    padding: 10px;
     font-size: 30px;
     display: flex;
     justify-content: center;
@@ -50,6 +48,28 @@
 .movieMetaData {
     padding: 10px;
 }
+
+.prefer {
+    font-size: 25px;
+}
+.prefer > svg {
+    padding: 3px;
+    width: 25px;
+    border-radius: 7px;
+    border: 2px solid;
+}
+
+.likes {
+    color: #2997ff;
+    border-color: #2997ff;
+    
+}
+
+.dislikes {
+    color: #ed1d24;
+    border: #ed1d24;
+}
+
 .casting {
     text-decoration: none;
     padding: 2.5px;
@@ -66,7 +86,7 @@
 }
 
 
-.directorList, .castingList {
+.directorUL, .castingUL {
     overflow: auto;
     display: flex;
     scrollbar-width: none;
@@ -74,36 +94,54 @@
 }
 
 .actorName {
-    width: 111px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 120px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-align: center;
+    align-items: baseline;
+   
+}
+
+.profilePic {
+    margin: 0 auto;
+    display: block;
 }
 
 .directorList::-webkit-scrollbar, .castingList::-webkit-scrollbar {
     display: none;
 }
-.actor {
-    width: 111px;
+
+.reviewForm > .writeReviewWrapper {
+    display: flex;
+    padding: 10px 0px;
 }
-@media screen and (max-width: 768px) {
-    .movieMetaDataWrapper {
-        grid-template-columns: 50% 50%;
-    }
+.reviewForm > .writeReviewWrapper > textarea {
+    -webkit-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.25);
+    box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.25);
+    border: 1px solid #767676;
+    width: calc(100% - 70px);
+    border-radius: 7px;
+    margin-right: 10px;
+    height: calc(44px);
+}
 
-    .movieData {
-        padding: 0px;
-    }
-
-    .movieData h1 {
-        font-size: 20px;
-    }
+.reviewForm > div > button {
+    width: 50px;
+    height: 50px;
+    border: none;
+    background-color: #2997ff;
+    color: white;
+    font-size: 15px;
 }
 
 /* style.css 에서 degree 도 바꿔야 함*/
 @media screen and (max-width: 480px) {
     .movieMetaDataWrapper {
-        grid-template-columns: 100%;
+        flex-direction: column;
     }
 
     .movieData {
@@ -112,6 +150,7 @@
 
     .movieData h1 {
         font-size: 20px;
+        
     }
 
     .movieMetaData { 

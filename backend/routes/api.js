@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { connectDB, user, movie, policy }= require('../model')
+const { connectDB, user, movie, policy, review  }= require('../model')
 /* GET users listing. */
 
 connectDB;
@@ -11,9 +11,6 @@ router.get('/', async(req, res, next) => {
 
 router.get('/movie/', async(req, res, next) => {
   let page = req.params.page;
-
-  //page ? page=Number(page) : page=0;
-  //const getMovies = await movie.find().limit(10).skip(page*10);
 
   const getMovies = await movie.find();
 
@@ -59,4 +56,20 @@ router.get('/policy/:key', async(req, res, next) => {
 
   return res.status(400).send('');
 });
+
+router.get('/review', async(req, res, next) => {
+  const getReview = await review.find({});
+  if(getReview.length>=1) {
+    return res.json(getReview.content);
+  }
+  return res.status(400).json('no data');
+});
+
+router.post('/review', async(req, res, next) => {
+  review.create({
+
+  })
+  
+});
+
 module.exports = router;

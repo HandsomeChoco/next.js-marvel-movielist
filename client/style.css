@@ -135,11 +135,3 @@ table {
 ._all {
     background-color: #3fa449;
 }
-
-@media screen and (max-width: 500px) {
-    .degree {
-        width: 20px;
-        height: 20px;
-        font-size: 12px;
-    }
-}

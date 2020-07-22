@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     createdAt: { type: Date, required: true, default: Date.now() },
     updatedAt: { type: Date, required: true, default: Date.now() },
     age: { type: Number, min: 0, max: 200 }
-})
+});
 
 const movieSchema = new mongoose.Schema({
     title: { type: String, required: true },
@@ -32,15 +32,25 @@ const movieSchema = new mongoose.Schema({
     dislikes: { type: [String], default: [] },
     runningTime: { type: Number, required: true },
     degree: { type: Number, required: true }
-})
+});
 
 const policySchema = new mongoose.Schema({
-    content: { type: String, required: true, },
+    content: { type: String, required: true },
     key: { type: String, required: true, unique: true }
-})
+});
+
+const reviewSchema = new mongoose.Schema({
+    content: { type: String, required: true },
+    authorId: { type: String, required: true, unique: true },
+    movieId: { type: String, required: true, unique: true },
+    createdAt: { type: Date, required: true },
+    updatedAt: { type: Date, required: true },
+});
+
 module.exports = {
     connectDB,
     user: mongoose.model('user', userSchema),     
     movie: mongoose.model('movie', movieSchema),
-    policy: mongoose.model('policy', policySchema)
+    policy: mongoose.model('policy', policySchema),
+    review: mongoose.model('review', reviewSchema)
 }
