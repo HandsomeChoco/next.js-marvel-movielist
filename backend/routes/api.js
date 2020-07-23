@@ -27,7 +27,7 @@ router.get('/movie/:name', async(req, res, next) => {
   if(getMovie.length>=1) {
     return res.json(getMovie);
   }
-  return res.status(400).send('no result');
+  return res.status(404).json({});
 });
 
 router.get('/movie/search/:name', async(req, res, next) => {

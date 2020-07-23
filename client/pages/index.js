@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Layout from '../components/Layout';
 import indexCSS from './index.module.css'
 
-export async function getStaticProps(context) {
+export async function getServerSideProps() {
   const movieList = await fetch("http://10.10.12.3:4000/api/movie")
                 .then(response => response.json());
   

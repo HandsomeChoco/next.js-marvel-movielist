@@ -8,14 +8,19 @@ import Axios from 'axios';
 
 import FontAwesome, { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-regular-svg-icons'
-
 import React, {useState} from 'react'
+
 export async function getServerSideProps(context) {
-  const data = await fetch(`http://10.10.12.3:4000/api/movie/${encodeURIComponent(context.params.title)}`)
+  let data, review;
+  try {
+    data = await fetch(`http://10.10.12.3:4000/api/movie/${encodeURIComponent(context.params.title)}`)
                 .then(response => response.json());
-  const review = await fetch(`http://10.10.12.3:4000/api/review`)
-                  .then(response => response.json());
-                  console.log(review, data)
+    review = await fetch(`http://10.10.12.3:4000/api/review`)
+      .then(response => response.json());
+    
+  } catch(err) {
+    return err;
+  }
   return {
     props: { 
       data,
@@ -44,15 +49,14 @@ const Movie = ( data, review ) => {
 
 function ChildOfLayout({ prop, review }) {
   return(
-    <div id={titleCSS.contentContainer}>
+    <div>
       <div className={titleCSS.movieMetaDataWrapper}>
-        <MoviePoster _movieTitle={prop.title} _path={prop.imageFileName}/>
+        <MoviePoster _movieTitle={prop.title} _path={prop.imageFileName} _degreeIcon={prop.degree}/>
         <MovieInfo 
           _id={prop._id}
           _title={prop.title} 
           _enTitle={prop.enTitle}
           _year={prop.year}
-          _degreeIcon={prop.degree}
           _director={prop.director}
           _likesCount={prop.likes.length}
           _dislikesCount={prop.dislikes.length}
@@ -67,22 +71,37 @@ function ChildOfLayout({ prop, review }) {
   );
 }
 
-function MoviePoster({ _path, _movieTitle }) {
+function MoviePoster({ _path, _movieTitle, _degreeIcon }) {
+  function getColor(age) {
+    let color;
+    if(age==='all') {
+      color='#3fa449';
+    } else if (age==12) {
+      color='#22a2dc';
+    } else if (age==15) {
+      color='#efa126';
+    } else if (age==18) {
+      color='#cb2126';
+    }
+    return color;
+  }
   return (
     <div className={titleCSS.moviePoster}>
       <div>
+        <span className={titleCSS.degree} style={{backgroundColor:getColor(_degreeIcon)}}>
+          <b>{_degreeIcon}</b>
+        </span>
         <img src={`/imgs/poster/${_path}`} alt={_movieTitle} title={_movieTitle+' 포스터'} />
       </div>
     </div>
   );
 }
 
-// degreeIcon 의 css 는 글로벌 스타일에 _12, _15, _18, _all 로 정의되어 있음.
 function MovieInfo({ _id, _title, _enTitle, _year, _degreeIcon, _director, _likesCount, _dislikesCount, _score, _runningTime, _casting }) {
   return(
     <div className={titleCSS.movieData}>
       {_id ? <input type="hidden" name="movieId" value={_id}/> : ''}
-      <MovieTitleAndDegree
+      <MovieTitle
         __degreeIcon={_degreeIcon}
         __title={_title}
         __enTitle={_enTitle}
@@ -100,14 +119,11 @@ function MovieInfo({ _id, _title, _enTitle, _year, _degreeIcon, _director, _like
   );
 }
 
-function MovieTitleAndDegree({ __degreeIcon, __title, __enTitle, __year }) {
+function MovieTitle({__title, __enTitle, __year }) {
   const year = moment(__year).format('YYYY');
   return(
     <div>
       <h1> 
-        <span className={"degree " + "_" + __degreeIcon}>
-          {__degreeIcon}
-        </span> 
         {__title}
       </h1>
       <div className={titleCSS.subTitle}>
@@ -130,7 +146,6 @@ function MovieMetaData({ __likes, __dislikes, __director, __score, __runningTime
                   src={`/imgs/actor/${v}.jfif`} 
                   className={titleCSS.profilePic}
                 />
-                
                 <div className={titleCSS.actorName} title={v}>
                   {v}
                 </div>
@@ -147,14 +162,16 @@ function MovieMetaData({ __likes, __dislikes, __director, __score, __runningTime
   return(
     <div className={titleCSS.movieMetaData}>
       <div>감독: <ul className={titleCSS.directorUL}>{loopListWithPicOrNot(__director)}</ul></div>
-      <div className={titleCSS.prefer}>
+      <div className={titleCSS.tasty}>
         <FontAwesomeIcon icon={faThumbsUp} className={titleCSS.likes}/> {__likes} 
         <FontAwesomeIcon icon={faThumbsDown} className={titleCSS.dislikes}/> {__dislikes}
       </div>
       
-      <div>평점: {__score}</div>
-      <div>상영시간: {__runningTime}분</div>
-      <div>출연진: <ul className={titleCSS.castingUL}>{loopListWithPicOrNot(__casting, true)}</ul></div>
+      <div className={titleCSS.movieInfo}>
+        <div>평점: {__score}</div>
+        <div>상영시간: {__runningTime}분</div>
+        <div>출연진: <ul className={titleCSS.castingUL}>{loopListWithPicOrNot(__casting, true)}</ul></div>
+      </div>
     </div>
   );
 }

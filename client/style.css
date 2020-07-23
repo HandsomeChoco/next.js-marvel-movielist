@@ -108,30 +108,3 @@ table {
     text-decoration: none;
     color: #d6d6d6;
 }
-
-/* 영화 등급 아이콘 */
-.degree  {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    width: calc(30px);
-    height: calc(30px);
-    border-radius: 100%;
-    font-size: 15px;
-    font-weight: bold;
-}
-._12 {
-    background-color: #22a2dc;
-}
-._15 {
-    background-color: #efa126;
-}
-
-._18 {
-    background-color: #cb2126;
-}
-
-._all {
-    background-color: #3fa449;
-}
