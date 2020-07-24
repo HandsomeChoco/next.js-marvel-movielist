@@ -44,3 +44,9 @@
     width: 1fr;
     height: calc(200px - 10px - 10px);
 }
+
+.footerLink {
+    padding: 0px 10px;
+    text-decoration: none;
+    color: #d6d6d6;
+}

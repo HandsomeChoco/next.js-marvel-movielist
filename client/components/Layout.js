@@ -29,7 +29,7 @@ function Footer({ items }) {
         {items.map((data, index) => {
           return(
             <Link href={data} key={index}>
-              <a className="footerLink"><span>{data}</span></a>
+              <a className={style.footerLink}><span>{data}</span></a>
             </Link>
           );
         })}
