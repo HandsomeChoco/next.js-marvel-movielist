@@ -58,11 +58,19 @@
 }
 
 .tasty {
-    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
     font-size: 25px;
+    padding: 10px;
 }
-.tasty > svg {
+
+.tasty > div {
+    display: flex;
+    align-items: center;
+}
+.tasty > div > svg {
     padding: 3px;
+    margin-right: 10px;
     width: 25px;
     border-radius: 12px;
     border: 2px solid;
@@ -70,7 +78,7 @@
 
 .likes {
     color: #2997ff;
-    border-color: #2997ff;
+    border: #2997ff;
     
 }
 
@@ -81,6 +89,10 @@
 
 .movieInfo {
     text-align: center;
+}
+
+.movieInfo .score, .runningTime {
+    padding: 5px;
 }
 .casting {
     text-decoration: none;
@@ -103,6 +115,8 @@
     display: flex;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px;
 }
 
 .actorName {

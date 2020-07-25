@@ -134,7 +134,7 @@ function MovieTitle({__title, __enTitle, __year }) {
 }
 
 function MovieMetaData({ __likes, __dislikes, __director, __score, __runningTime, __casting }) {
-  function loopListWithPicOrNot(prop) {
+  function isListWithPic(prop) {
     const list = prop.map((v, index) => {
       return(
         <Link href={`/actor/${v}`} key={index}>
@@ -161,16 +161,16 @@ function MovieMetaData({ __likes, __dislikes, __director, __score, __runningTime
   
   return(
     <div className={titleCSS.movieMetaData}>
-      <div>감독: <ul className={titleCSS.directorUL}>{loopListWithPicOrNot(__director)}</ul></div>
+      <div style={{textAlign:'left'}}> 감독: <ul className={titleCSS.directorUL}>{isListWithPic(__director)}</ul></div>
       <div className={titleCSS.tasty}>
-        <FontAwesomeIcon icon={faThumbsUp} className={titleCSS.likes}/> {__likes} 
-        <FontAwesomeIcon icon={faThumbsDown} className={titleCSS.dislikes}/> {__dislikes}
+        <div><FontAwesomeIcon icon={faThumbsUp} className={titleCSS.likes}/> {__likes} </div>
+        <div><FontAwesomeIcon icon={faThumbsDown} className={titleCSS.dislikes}/> {__dislikes}</div>
       </div>
       
       <div className={titleCSS.movieInfo}>
-        <div>평점: {__score}</div>
-        <div>상영시간: {__runningTime}분</div>
-        <div>출연진: <ul className={titleCSS.castingUL}>{loopListWithPicOrNot(__casting, true)}</ul></div>
+        <div className={titleCSS.score}>평점: {__score}</div>
+        <div className={titleCSS.runningTime}>상영시간: {__runningTime}분</div>
+        <div style={{textAlign:'left'}}> 출연진: <ul className={titleCSS.castingUL}>{isListWithPic(__casting, true)}</ul></div>
       </div>
     </div>
   );
