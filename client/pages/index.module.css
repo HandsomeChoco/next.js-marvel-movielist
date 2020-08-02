@@ -51,6 +51,11 @@
     height: 16px;
 }
 
+@media screen and (min-width: 3001px) {
+    .movieListItem {
+        width: calc(10% - 32px);
+    }
+}
 @media screen and (max-width: 3000px) {
     .movieListItem {
         width: calc(10% - 32px);

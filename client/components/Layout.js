@@ -51,7 +51,7 @@ function Content({ children }) {
   );
 }
 
-function Layout({ childComponent, title  }) {
+function Layout({ childComponent, title }) {
   const fontLink = 'https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap'
   return (
     <div id={style.container}>
