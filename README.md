@@ -20,11 +20,11 @@ I'm just creating it, because i love marvel movies. and in order to practice Nex
 
 6. 백엔드 서버를 시작하면 MongoDB에 "NextAPP" 이라는 데이터베이스가 자동으로 생성될 것입니다.<br/>
    데이터베이스 "NextApp" 은 "users" 와 "movies" 두 개의 콜렉션(= RDBMS의 테이블과 같은 역할)을 가집니다. 
-   <b>users</b>는 사용자 계정 정보를 위한 콜렉션 입니다. 이 콜렉션은 당신이 계정을 생성하기 전까지 비어 있을 것입니다.
+   "users"는 사용자 계정 정보를 위한 콜렉션 입니다. 이 콜렉션은 당신이 계정을 생성하기 전까지 비어 있을 것입니다.
    "movies" 콜렉션은 자동으로 생성되지 않으니 "movies" 라는 이름을 가지는 콜렉션을 수동으로 생성해야 합니다.
    "NextApp" 데이터베이스에 "movies" 콜렉션을 생성하십시오. "MongoDB Compass Community" 를 통해 간단하게 생성할 수 있습니다.
    
-7. 이제 , <b>"movies"</b> 콜렉션에 영화에 대한 데이터를 삽입할 것입니다. "MongoDB Compass Community" 를 이용하면 간단하게 데이터를 삽입할 수 있습니다.<br/>
+7. 이제 , "movies" 콜렉션에 영화에 대한 데이터를 삽입할 것입니다. "MongoDB Compass Community" 를 이용하면 간단하게 데이터를 삽입할 수 있습니다.<br/>
    "MongoDB Compass Community" 를 실행하고 "movies" 콜렉션에 접근 합니다.<br/>
    7-1. ADD DATA 를 클릭하십시오. <br/>
    7-2. ADD DATA 메뉴의 select Import File 을 선택하십시오. <br/>
@@ -66,7 +66,7 @@ I'm just creating it, because i love marvel movies. and in order to practice Nex
    
 6. if you started backend server. database "NextApp" will be automatically created on your mongoDB.<br/>
    database "NextApp" has two collections(= same role of table in RDBMS) which is called "users" and "movies".
-   <b>users</b> collection is for user accounts. this collection is epmty until when you create account on project. 
+   users collection is for user accounts. this collection is epmty until when you create account on project. 
    "movies" collection will not create automatically, you have to create collection "movies" manually. 
    create "movies" collection in the "NextApp" database. you can create easily with "MongoDB Compass Community"
    
