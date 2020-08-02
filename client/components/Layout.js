@@ -23,16 +23,21 @@ function Top({ alt }) {
 }
 
 function Footer({ items }) {
+  function movieCard(arr) {
+    const list = arr.map((data, index) => {
+      return(
+        <Link href={data} key={index}>
+          <a className={style.footerLink}><span>{data}</span></a>
+        </Link>
+      );
+    })
+    return list;
+  }
+
   return(
     <footer className={style.footer}>
       <div>
-        {items.map((data, index) => {
-          return(
-            <Link href={data} key={index}>
-              <a className={style.footerLink}><span>{data}</span></a>
-            </Link>
-          );
-        })}
+        {movieCard(items)}
       </div>
     </footer>
   );
@@ -47,11 +52,12 @@ function Content({ children }) {
 }
 
 function Layout({ childComponent, title  }) {
+  const fontLink = 'https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap'
   return (
     <div id={style.container}>
       <Head>
         <title>{title}</title>
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap" rel="stylesheet"/>
+        <link href={fontLink} rel="stylesheet"/>
       </Head>
       <Top alt={'메인으로 이동 합니다.'}/>
       <Content children = {childComponent}/>
