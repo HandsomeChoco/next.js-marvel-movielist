@@ -31,7 +31,7 @@ function Home({ movieList }) {
   function _renderMovieComponent() {
     const component = (
       <ul className={indexCSS.movieList}>
-        {_renderMovie ? _renderMovie() : 'loading...'}
+        { _renderMovie ? _renderMovie() : 'loading...' }
       </ul>
     )
     return component;
