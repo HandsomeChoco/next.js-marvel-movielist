@@ -70,7 +70,7 @@ I'm just creating it, because i love marvel movies. and in order to practice Nex
    "movies" collection will not create automatically, you have to create collection "movies" manually. 
    create "movies" collection in the "NextApp" database. you can create easily with "MongoDB Compass Community"
    
-7. now, we will put movie datas in <b>movies</b> collection. you can easily insert data with MongoDB Compass Community.<br/>
+7. now, we will put movie datas in movies collection. you can easily insert data with MongoDB Compass Community.<br/>
    run MongoDB Compass and access to the "movies" collection. <br/>
    7-1. click, ADD DATA, <br/>
    7-2. select Import File of ADD DATA menu. <br/>
