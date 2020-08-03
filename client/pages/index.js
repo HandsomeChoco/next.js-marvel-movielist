@@ -3,7 +3,7 @@ import Layout from '../components/Layout';
 import indexCSS from './index.module.css'
 
 export async function getServerSideProps() {
-  const movieList = await fetch("http://10.10.12.3:4000/api/movie")
+  const movieList = await fetch("http://localhost:4000/api/movie")
                 .then(response => response.json());
   
   return {

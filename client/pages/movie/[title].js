@@ -13,9 +13,9 @@ import React, {useState} from 'react'
 export async function getServerSideProps(context) {
   let data, review;
   try {
-    data = await fetch(`http://10.10.12.3:4000/api/movie/${encodeURIComponent(context.params.title)}`)
+    data = await fetch(`http://localhost:4000/api/movie/${encodeURIComponent(context.params.title)}`)
                 .then(response => response.json());
-    review = await fetch(`http://10.10.12.3:4000/api/review`)
+    review = await fetch(`http://localhost:4000/api/review`)
       .then(response => response.json());
     
   } catch(err) {
