@@ -1,205 +1,30 @@
+:root {
+	--color-white: #ffffff;
+	--color-black: #000000;
+	--color-gray: #b6b6b6;
+	--num-sixty-px: 60px;
+	--num-twelve-px: 12px;
+}
+
 .container {
-    display: flex;
-    height: calc(100vh - 70px);
-    width: calc(100vw - 40px);
-    opacity: 0.5;
-    background-size: contain;
-    background-color: black;
-    background-repeat: no-repeat;
-    background-position: left center;
+	display: flex;
+	background-color: var(--color-black);
+	border: 1px solid red;
 }
 
-.movieMetaDataWrapper {
-    display: flex;
-    width: 100%;
-}
-.moviePoster {
-    text-align: center;
-    height: 1fr;
-    margin: 10px 10px 10px 10px;
+.wrapper {
+	border: 1px solid var(--color-white);
 }
 
-.moviePoster > div > .degree{
-    position: absolute;
-    left: 30px;
-    top: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: black;
-    width: calc(30px);
-    height: calc(30px);
-    border-radius: 100%;
-    font-size: 15px;
-    color: white;
-    border: 2px solid white;
+.title {
+	color: var(--color-white);
 }
 
-.moviePoster img {
-    width: calc(100% - 2px);
-    border: 1px solid #d6d6d6;
-    border-radius: 12px;
-    -webkit-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.25);
-    -moz-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.25);
-    box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.25);
+.kr {
+	font-size: var(--num-sixty-px);
 }
 
-.subTitle {
-    text-align: center;
-    font-size: 12px;
-    color: #767676;
-    font-weight: bolder;
-    padding: 0px 10px 10px 10px;
-    border-bottom: 1px solid #e0e0e0;
+.en {
+	font-size: var(--num-twelve-px);
+	color: var(--color-gray);
 }
-.movieData {
-    width: 100%;
-    overflow: auto;
-}
-.movieData h1{
-    font-weight: bold;
-    padding: 10px;
-    font-size: 30px;
-    text-align: center;
-}
-
-.movieMetaData {
-    padding: 10px;
-}
-
-.directorTitle, .castingTitle {
-    font-weight: bold;
-}
-.tasty {
-    display: flex;
-    justify-content: space-evenly;
-    font-size: 25px;
-    padding: 10px;
-}
-
-.tasty > div {
-    display: flex;
-    align-items: center;
-}
-.tasty > div > svg {
-    padding: 3px;
-    margin-right: 10px;
-    width: 25px;
-    border-radius: 12px;
-    border: 2px solid;
-    cursor: pointer;
-}
-
-.likes {
-    color: #2997ff;
-    border: #2997ff;
-}
-
-.dislikes {
-    color: #ed1d24;
-    border: #ed1d24;
-}
-
-.movieInfo {
-    text-align: center;
-}
-
-.movieInfo .score, .runningTime {
-    padding: 5px;
-}
-.casting {
-    margin: 0px 10px 0px 10px;
-    text-decoration: none;
-    text-align: center;
-    color: #000000;
-}
-
-.casting:hover {
-    font-weight: bold;
-    text-decoration: underline;
-}
-
-.degreeIconWrapper {
-    width: 30px;
-    height: 30px;
-}
-
-
-.directorUL, .castingUL {
-    overflow: auto;
-    display: flex;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    border-bottom: 1px solid #e0e0e0;
-    padding: 10px 0px;
-}
-
-.actorName {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    width: 120px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    text-align: center;
-    align-items: baseline;
-}
-
-.profilePic {
-    border-radius: 5px;
-    -webkit-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.25);
-    -moz-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.25);
-    box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.25);
-}
-
-.directorList::-webkit-scrollbar, .castingList::-webkit-scrollbar {
-    display: none;
-}
-
-.reviewForm > .writeReviewWrapper {
-    display: flex;
-    padding: 10px 0px;
-}
-.reviewForm > .writeReviewWrapper > textarea {
-    -webkit-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.25);
-    -moz-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.25);
-    box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.25);
-    border: 1px solid #d6d6d6;
-    width: calc(100% - 70px);
-    border-radius: 12px;
-    margin-right: 10px;
-    height: calc(40px);
-    padding: 5px;
-}
-
-.reviewForm > div > button {
-    width: 50px;
-    height: 50px;
-    border: none;
-    background-color: #ed1d24;
-    color: white;
-    font-size: 15px;
-    border-radius: 12px;
-}
-
-.review {
-    padding: 10px;
-}
-/* style.css 에서 degree 도 바꿔야 함*/
-@media screen and (max-width: 480px) {
-    .movieMetaDataWrapper {
-        flex-direction: column;
-    }
-
-    .movieData {
-        padding: 0px;
-    }
-
-    .movieData h1 {
-        font-size: 20px;
-        
-    }
-}
-
-
-/* 영화 등급 아이콘 */
