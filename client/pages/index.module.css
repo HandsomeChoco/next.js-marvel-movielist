@@ -1,106 +1,110 @@
+:root {
+	--minus-border: 14px;
+}
 .movieList {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-start;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
 }
 
 .movieList img {
-    width: calc(100%);
-    border-radius: 7px;
-    object-fit: cover;
-    height: auto;
+	width: calc(100%);
+	border-radius: 7px;
+	object-fit: cover;
+	height: auto;
 }
 
 .movieListItem {
-    margin: 5px;
-    border-radius: 7px;
-    padding: 10px;
-    text-decoration: none;
-    width: calc(10% - 30px);
-    border: 1px solid #d6d6d6;
-    transition: 0.3s;
+	background-color: rgb(246, 246, 246);
+	margin: 5px;
+	margin-bottom: 15px;
+	border-radius: 7px;
+	text-decoration: none;
+	width: calc(10% - 32px);
+	border: 2px solid rgb(214, 214, 214);
+	transition: 0.3s;
 }
 
 .movieListItem:hover {
-    transform: scale(1.05);
-    transition: 0.3s;
+	transform: scale(1.2);
+	transition: 0.3s;
+	z-index: 2;
 }
 
 .movieListItem h1 {
-    text-align: center;
-    font-weight: bold;
-    color: white;
-    padding: 10px 0px;
-    font-size: 20px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+	text-align: center;
+	font-weight: bold;
+	color: black;
+	padding: 10px 0px;
+	font-size: 20px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .movieListItem > li > div > h1 {
-    padding: 5px 0px;
+	padding: 5px 0px;
 }
 
 .movieMetaData {
-    display: grid;
-    padding: 5px;
-    grid-template-columns: 50% 50%;
+	display: grid;
+	padding: 5px;
+	grid-template-columns: 50% 50%;
 }
 
 .movieMetaData div svg {
-    height: 16px;
+	height: 16px;
 }
 
 @media screen and (min-width: 3001px) {
-    .movieListItem {
-        width: calc(10% - 32px);
-    }
+	.movieListItem {
+		width: calc(10% - var(--minus-border));
+	}
 }
 @media screen and (max-width: 3000px) {
-    .movieListItem {
-        width: calc(10% - 32px);
-    }
+	.movieListItem {
+		width: calc(10% - var(--minus-border));
+	}
 }
 
 @media screen and (max-width: 2500px) {
-    .movieListItem {
-        width: calc(12.5% - 32px);
-    }
+	.movieListItem {
+		width: calc(12.5% - var(--minus-border));
+	}
 }
 
 @media screen and (max-width: 2000px) {
-    .movieListItem {
-        width: calc(16.6667% - 32px);
-    }
+	.movieListItem {
+		width: calc(16.6667% - var(--minus-border));
+	}
 }
 
 @media screen and (max-width: 1600px) {
-    .movieListItem {
-        width: calc(20% - 32px);
-    }
+	.movieListItem {
+		width: calc(20% - var(--minus-border));
+	}
 }
 
 @media screen and (max-width: 1024px) {
-    .movieListItem {
-        width: calc(25% - 32px);
-    }
+	.movieListItem {
+		width: calc(25% - var(--minus-border));
+	}
 }
 
-
 @media screen and (max-width: 768px) {
-    .movieListItem {
-        width: calc(33.3% - 32px);
-    }
+	.movieListItem {
+		width: calc(33.3% - var(--minus-border));
+	}
 }
 
 @media screen and (max-width: 480px) {
-    .movieListItem {
-        width: calc(50% - 32px);
-    }
+	.movieListItem {
+		width: calc(50% - var(--minus-border));
+	}
 }
 
 @media screen and (max-width: 360px) {
-    .movieListItem {
-        width: calc(100% - 32px);
-    }
+	.movieListItem {
+		width: calc(100% - var(--minus-border));
+	}
 }
