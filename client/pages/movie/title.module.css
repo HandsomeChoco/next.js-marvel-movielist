@@ -1,30 +1,110 @@
 :root {
-	--color-white: #ffffff;
-	--color-black: #000000;
-	--color-gray: #b6b6b6;
-	--num-sixty-px: 60px;
-	--num-twelve-px: 12px;
+	--color-white: rgb(255, 255, 255);
+	--color-black: rgb(0, 0, 0, 0.75);
+	--color-enTitle: rgb(118, 118, 118);
+	--color-like: rgb(237, 29, 36);
+	--color-dislike: rgb(41, 151, 255);
+	--color-titleBorder: rgb(240, 240, 240);
+	--num-subTitle: 12px;
+	--num-title: 30px;
+	--num-ten-px: 10px;
+	--num-radius: 7px;
+	--num-tasty: 25px;
+	--viewport: 100vw;
+	--imagesize: 300px;
+	--test-border: 1px solid var(--color-black);
 }
 
 .container {
 	display: flex;
-	background-color: var(--color-black);
-	border: 1px solid red;
+	width: calc(--viewport - 20px);
+	border: var(--test-border);
+	background-color: var(--color-white);
 }
 
+.poster {
+	width: var(--imagesize);
+	border-radius: var(--num-radius);
+}
 .wrapper {
-	border: 1px solid var(--color-white);
+	background-color: none;
+	border: var(--test-border);
+}
+
+.titleWrap {
+	border: 1px solid black;
+	width: 100%;
 }
 
 .title {
-	color: var(--color-white);
+	text-align: center;
+	color: var(--color-black);
+	margin-bottom: var(--num-ten-px);
 }
 
 .kr {
-	font-size: var(--num-sixty-px);
+	padding-top: var(--num-ten-px);
+	font-size: var(--num-title);
+	font-weight: bold;
 }
 
 .en {
-	font-size: var(--num-twelve-px);
-	color: var(--color-gray);
+	color: var(--color-enTitle);
+	font-size: var(--num-subTitle);
+	font-weight: bold;
+}
+
+.tasty {
+	margin: var(--num-ten-px) 0px;
+	display: flex;
+	justify-content: space-around;
+}
+
+.tasty span {
+	display: flex;
+	align-items: baseline;
+	font-size: var(--num-tasty);
+	cursor: pointer;
+}
+.tasty svg {
+	height: calc(var(--num-tasty) - 5px);
+	margin-right: 10px;
+}
+
+.like {
+	color: var(--color-like);
+}
+
+.dislike {
+	color: var(--color-dislike);
+}
+
+.list {
+	display: flex;
+	width: calc(var(--viewport) - var(--imagesize) - 20px);
+	overflow: auto;
+}
+
+.item {
+	margin: var(--num-ten-px);
+	width: 120px;
+	display: flex;
+	flex-direction: column;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.item > span {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: center;
+	margin: var(--num-ten-px) 0px;
+}
+@media screen and (max-width: 500px) {
+	.container {
+		flex-direction: column;
+	}
+	.poster {
+		width: calc(100vw - 20px);
+	}
 }
