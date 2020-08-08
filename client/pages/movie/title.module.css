@@ -1,6 +1,6 @@
 :root {
 	--color-white: rgb(255, 255, 255);
-	--color-black: rgb(0, 0, 0, 0.75);
+	--color-black: rgb(0, 0, 0);
 	--color-enTitle: rgb(118, 118, 118);
 	--color-like: rgb(237, 29, 36);
 	--color-dislike: rgb(41, 151, 255);
@@ -13,6 +13,8 @@
 	--viewport: 100vw;
 	--imagesize: 300px;
 	--test-border: 1px solid var(--color-black);
+	--size-padding: 40px;
+	--size-fitToLine: calc(var(--viewport) - var(--size-padding));
 }
 
 .container {
@@ -32,8 +34,9 @@
 }
 
 .titleWrap {
-	border: 1px solid black;
-	width: 100%;
+	border-bottom: 1px solid var(--color-titleBorder);
+	margin: var(--num-ten-px);
+	width: 1fr;
 }
 
 .title {
@@ -43,7 +46,6 @@
 }
 
 .kr {
-	padding-top: var(--num-ten-px);
 	font-size: var(--num-title);
 	font-weight: bold;
 }
@@ -79,10 +81,20 @@
 	color: var(--color-dislike);
 }
 
+.listName {
+	font-weight: bold;
+	margin-left: var(--num-ten-px);
+}
 .list {
 	display: flex;
-	width: calc(var(--viewport) - var(--imagesize) - 20px);
+	width: calc(var(--viewport) - var(--imagesize) - 40px);
 	overflow: auto;
+	border-bottom: 1px solid var(--color-titleBorder);
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+.list::-webkit-scrollbar {
+	display: none;
 }
 
 .item {
@@ -93,7 +105,14 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
-
+.item > img {
+	border-radius: 100%;
+	width: 110px;
+	height: 110px;
+	margin: auto;
+	border: 2px solid var(--color-black);
+	object-fit: fill;
+}
 .item > span {
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -105,6 +124,10 @@
 		flex-direction: column;
 	}
 	.poster {
-		width: calc(100vw - 20px);
+		width: var(--size-fitToLine);
+	}
+
+	.list {
+		width: var(--size-fitToLine);
 	}
 }
