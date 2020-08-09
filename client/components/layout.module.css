@@ -1,5 +1,6 @@
 #container {
 	font-family: 'Noto Sans KR', sans-serif;
+	border: 1px solid black;
 	max-width: 3000px;
 	margin: auto;
 	background-color: white;

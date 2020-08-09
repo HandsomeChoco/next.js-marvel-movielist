@@ -50,6 +50,17 @@ const Content = ({ children }) => {
 const Layout = ({ childComponent, title }) => {
 	const fontLink =
 		'https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap';
+	const footerItem = [
+		`Terms of Use`,
+		`Privacy Policy`,
+		`Your California Privacy Rights`,
+		`Do Not Sell My Info`,
+		`Children's Online Privacy Policy`,
+		`License Agreement`,
+		`Interest-Based-Ads`,
+		`Marvel Insider Terms`,
+		`©2020 MARVEL`,
+	];
 	return (
 		<div id={style.container}>
 			<Head>
@@ -58,19 +69,7 @@ const Layout = ({ childComponent, title }) => {
 			</Head>
 			<Top alt={'메인으로 이동 합니다.'} />
 			<Content children={childComponent} />
-			<Footer
-				items={[
-					`Terms of Use`,
-					`Privacy Policy`,
-					`Your California Privacy Rights`,
-					`Do Not Sell My Info`,
-					`Children's Online Privacy Policy`,
-					`License Agreement`,
-					`Interest-Based-Ads`,
-					`Marvel Insider Terms`,
-					`©2020 MARVEL`,
-				]}
-			/>
+			<Footer items={footerItem} />
 		</div>
 	);
 };
