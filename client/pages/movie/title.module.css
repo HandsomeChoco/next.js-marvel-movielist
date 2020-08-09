@@ -11,26 +11,25 @@
 	--num-radius: 7px;
 	--num-tasty: 25px;
 	--viewport: 100vw;
-	--imagesize: 300px;
+	--imageSize: 300px;
 	--test-border: 1px solid var(--color-black);
 	--size-padding: 40px;
 	--size-fitToLine: calc(var(--viewport) - var(--size-padding));
+	--size-layoutMax: 3000px;
 }
 
 .container {
 	display: flex;
 	width: calc(--viewport - 20px);
-	border: var(--test-border);
 	background-color: var(--color-white);
 }
 
 .poster {
-	width: var(--imagesize);
+	width: var(--imageSize);
 	border-radius: var(--num-radius);
 }
 .wrapper {
 	background-color: none;
-	border: var(--test-border);
 }
 
 .titleWrap {
@@ -87,9 +86,11 @@
 }
 .list {
 	display: flex;
-	width: calc(var(--viewport) - var(--imagesize) - 40px);
+	width: calc(var(--viewport) - var(--imageSize) - 50px);
+	max-width: calc(var(--size-layoutMax) - var(--imageSize) - 40px);
 	overflow: auto;
 	border-bottom: 1px solid var(--color-titleBorder);
+	margin: var(--num-ten-px);
 	-ms-overflow-style: none; /* IE and Edge */
 	scrollbar-width: none; /* Firefox */
 }
@@ -99,13 +100,12 @@
 
 .item {
 	margin: var(--num-ten-px);
+	margin-left: 0px;
 	width: 120px;
-	display: flex;
-	flex-direction: column;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
-.item > img {
+.profile {
 	border-radius: 100%;
 	width: 110px;
 	height: 110px;
@@ -113,7 +113,7 @@
 	border: 2px solid var(--color-black);
 	object-fit: fill;
 }
-.item > span {
+.name {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	text-align: center;

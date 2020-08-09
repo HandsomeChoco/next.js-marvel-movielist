@@ -125,14 +125,18 @@ const Casting = ({ data }) => {
 	function casting(arr) {
 		const list = arr.map((v, i) => {
 			return (
-				<Link href={`/actor/${v}`} key={i}>
-					<a style={{ textDecoration: 'none' }}>
-						<li className={titleCSS.item}>
-							<img src={`/imgs/actor/${v}.jfif`} alt={`${v} 프로필 이미지`} />
-							<span>{v}</span>
-						</li>
-					</a>
-				</Link>
+				<li className={titleCSS.item} key={i}>
+					<Link href={`/actor/${v}`}>
+						<a style={{ textDecoration: 'none' }}>
+							<img
+								className={titleCSS.profile}
+								src={`/imgs/actor/${v}.jfif`}
+								alt={`${v} 프로필 이미지`}
+							/>
+							<div className={titleCSS.name}>{v}</div>
+						</a>
+					</Link>
+				</li>
 			);
 		});
 		return list;
@@ -142,8 +146,8 @@ const Casting = ({ data }) => {
 		<div>
 			<h3 className={titleCSS.listName}>감독</h3>
 			<ul className={titleCSS.list}>{casting(director)}</ul>
-			<h3 className={titleCSS.listName}>주연</h3>
-			<ul className={titleCSS.list}>{casting(allCasting)}</ul>
+			<h3 className={titleCSS.listName}>출연</h3>
+			<ul className={titleCSS.list}>{casting(mainCasting)}</ul>
 		</div>
 	);
 };
