@@ -3,9 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "d": "npm run-all --parallel start:**",
+    "d:client": "next dev",
+    "d:server": "nodemon node ../backend/bin/www",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    ""
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
