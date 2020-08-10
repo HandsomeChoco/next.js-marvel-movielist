@@ -1,29 +1,30 @@
 {
-  "name": "marvel-movies",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "d": "npm run-all --parallel start:**",
-    "d:client": "next dev",
-    "d:server": "nodemon node ../backend/bin/www",
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    ""
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.28",
-    "@fortawesome/free-brands-svg-icons": "^5.13.0",
-    "@fortawesome/free-regular-svg-icons": "^5.13.0",
-    "@fortawesome/free-solid-svg-icons": "^5.13.0",
-    "@fortawesome/react-fontawesome": "^0.1.10",
-    "@zeit/next-css": "^1.0.1",
-    "autoprefixer": "^9.8.0",
-    "axios": "^0.19.2",
-    "express": "^4.17.1",
-    "moment": "^2.26.0",
-    "next": "9.4.4",
-    "react": "16.13.1",
-    "react-dom": "16.13.1"
-  }
+	"name": "marvel-movies",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"d": "npm-run-all --parallel d:**",
+		"d:client": "next dev",
+		"d:server": "nodemon node ../backend/bin/www",
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start"
+	},
+	"dependencies": {
+		"@fortawesome/fontawesome-svg-core": "^1.2.28",
+		"@fortawesome/free-brands-svg-icons": "^5.13.0",
+		"@fortawesome/free-regular-svg-icons": "^5.13.0",
+		"@fortawesome/free-solid-svg-icons": "^5.13.0",
+		"@fortawesome/react-fontawesome": "^0.1.10",
+		"@zeit/next-css": "^1.0.1",
+		"autoprefixer": "^9.8.0",
+		"axios": "^0.19.2",
+		"express": "^4.17.1",
+		"moment": "^2.26.0",
+		"next": "9.4.4",
+		"nodemon": "^2.0.4",
+		"npm-run-all": "^4.1.5",
+		"react": "16.13.1",
+		"react-dom": "16.13.1"
+	}
 }
