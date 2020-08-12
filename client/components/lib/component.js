@@ -2,12 +2,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import func from './lib';
 
 const components = {
-	CreateIcon: (icon, css, prop) => {
+	CreateIcon: (className = null, icon, css, prop) => {
 		return (
-			<span>
+			<div className={className}>
 				<FontAwesomeIcon icon={icon} className={css} />
 				<span>{prop}</span>
-			</span>
+			</div>
 		);
 	},
 };

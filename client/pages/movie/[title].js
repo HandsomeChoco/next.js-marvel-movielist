@@ -81,20 +81,47 @@ const Article = ({ data }) => {
 const Tasty = ({ data }) => {
 	const likes = data.likes.length;
 	const dislikes = data.dislikes.length;
+	const runningTime = data.runningTime;
+	const degree = data.degree;
+
+	function degreeIcon(str) {
+		let colorCode;
+		switch (str | 0) {
+			case 12:
+				colorCode = '25A1DB';
+				break;
+			case 15:
+				colorCode = 'EEA125';
+				break;
+			case 18:
+				colorCode = 'CA2027';
+				break;
+			default:
+				colorCode = '3FA347';
+				break;
+		}
+		return colorCode;
+	}
 
 	return (
 		<div>
-			<div className={titleCSS.tasty}>
-				{components.CreateIcon(
-					faThumbsUp,
-					titleCSS.like,
-					lib.kFormatter(likes)
-				)}
-				{components.CreateIcon(
-					faThumbsDown,
-					titleCSS.dislike,
-					lib.kFormatter(dislikes)
-				)}
+			<div>
+				<div className={titleCSS.tasty}>
+					{components.CreateIcon(
+						titleCSS.icon,
+						faThumbsUp,
+						titleCSS.like,
+						lib.kFormatter(likes)
+					)}
+					{components.CreateIcon(
+						titleCSS.icon,
+						faThumbsDown,
+						titleCSS.dislike,
+						lib.kFormatter(dislikes)
+					)}
+					<div className={titleCSS.runningTime}> {runningTime}분</div>
+				</div>
+				<div>{degreeIcon(degree)},</div>
 			</div>
 		</div>
 	);
@@ -147,7 +174,7 @@ const Casting = ({ data }) => {
 			<h3 className={titleCSS.listName}>감독</h3>
 			<ul className={titleCSS.list}>{casting(director)}</ul>
 			<h3 className={titleCSS.listName}>출연</h3>
-			<ul className={titleCSS.list}>{casting(mainCasting)}</ul>
+			<ul className={titleCSS.list}>{casting(allCasting)}</ul>
 		</div>
 	);
 };

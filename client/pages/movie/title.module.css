@@ -58,15 +58,18 @@
 .tasty {
 	margin: var(--num-ten-px) 0px;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
+	border: 1px solid black;
 }
 
-.tasty span {
+.tasty div {
 	display: flex;
-	align-items: baseline;
+	align-items: center;
+	justify-content: center;
 	font-size: var(--num-tasty);
 	cursor: pointer;
 }
+
 .tasty svg {
 	height: calc(var(--num-tasty) - 5px);
 	margin-right: 10px;
@@ -78,6 +81,12 @@
 
 .dislike {
 	color: var(--color-dislike);
+}
+.icon {
+	flex-grow: 1;
+}
+.runningTime {
+	flex-basis: 70px;
 }
 
 .listName {
@@ -124,7 +133,7 @@
 		flex-direction: column;
 	}
 	.poster {
-		width: var(--size-fitToLine);
+		width: calc(var(--size-fitToLine) + 20px);
 	}
 
 	.list {
