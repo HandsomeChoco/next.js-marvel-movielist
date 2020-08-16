@@ -38,12 +38,12 @@ export async function getServerSideProps(context) {
 const Movie = ({ data, review }) => {
 	const router = useRouter();
 	const { title } = router.query;
+	const [showWriteReview, handleWriteReview] = useState('hide'); // 리뷰 작성 모달 보여주기 & 숨기기
 
 	return (
-		<Layout
-			title={`상세 정보: ${title}`}
-			childComponent={<Container data={data} />}
-		/>
+		<Layout title={`상세 정보: ${title}`}>
+			<Container data={data} />
+		</Layout>
 	);
 };
 
@@ -55,9 +55,10 @@ const Container = ({ data }) => {
 				<content>
 					<Titles data={data} />
 					<Casting data={data} />
-					<Review data={data} />
 				</content>
 			</main>
+			<Review data={data} />
+			<WriteReview />
 		</>
 	);
 };
@@ -65,8 +66,14 @@ const Container = ({ data }) => {
 const Article = ({ data }) => {
 	const imgFileName = data.imageFileName;
 	const title = data.title;
+	const degree = data.degree;
+	const runningTime = data.runningTime;
+
 	return (
 		<article className={titleCSS.wrapper}>
+			<div className={titleCSS.runningTime}>
+				{degree != 0 ? `${degree}세 관람가` : '등급 심사중'}, {runningTime}분
+			</div>
 			<img
 				src={`/imgs/poster/${imgFileName}`}
 				alt={title}
@@ -82,26 +89,8 @@ const Tasty = ({ data }) => {
 	const likes = data.likes.length;
 	const dislikes = data.dislikes.length;
 	const runningTime = data.runningTime;
-	const degree = data.degree;
-
-	function degreeIcon(str) {
-		let colorCode;
-		switch (str | 0) {
-			case 12:
-				colorCode = '25A1DB';
-				break;
-			case 15:
-				colorCode = 'EEA125';
-				break;
-			case 18:
-				colorCode = 'CA2027';
-				break;
-			default:
-				colorCode = '3FA347';
-				break;
-		}
-		return colorCode;
-	}
+	const score = data.score;
+	const noScore = '아직 평가가 없습니다.';
 
 	return (
 		<div>
@@ -119,9 +108,8 @@ const Tasty = ({ data }) => {
 						titleCSS.dislike,
 						lib.kFormatter(dislikes)
 					)}
-					<div className={titleCSS.runningTime}> {runningTime}분</div>
 				</div>
-				<div>{degreeIcon(degree)},</div>
+				<div>평점: {lib.showText(score, noScore)} </div>
 			</div>
 		</div>
 	);
@@ -132,10 +120,11 @@ const Titles = ({ data }) => {
 	const title = data.title;
 	const enTitle = data.enTitle;
 	const errText = '제목 정보를 가져오지 못했습니다.';
+
 	return (
 		<header className={titleCSS.titleWrap}>
 			<h3 className={`${titleCSS.title} ${titleCSS.kr}`}>
-				{lib.showText(title)}
+				<span>{lib.showText(title, errText)}</span>
 			</h3>
 			<h6 className={`${titleCSS.title} ${titleCSS.en}`}>
 				{lib.showText(enTitle, errText)}, ({year})
@@ -149,40 +138,67 @@ const Casting = ({ data }) => {
 	const mainCasting = data.mainCasting;
 	const allCasting = data.casting;
 
-	function casting(arr) {
-		const list = arr.map((v, i) => {
-			return (
-				<li className={titleCSS.item} key={i}>
-					<Link href={`/actor/${v}`}>
-						<a style={{ textDecoration: 'none' }}>
-							<img
-								className={titleCSS.profile}
-								src={`/imgs/actor/${v}.jfif`}
-								alt={`${v} 프로필 이미지`}
-							/>
-							<div className={titleCSS.name}>{v}</div>
-						</a>
-					</Link>
-				</li>
-			);
-		});
-		return list;
+	function casting(v) {
+		return (
+			<Link href={`/actor/${v}`}>
+				<a style={{ textDecoration: 'none' }}>
+					<img
+						className={titleCSS.profile}
+						src={`/imgs/actor/${v}.jfif`}
+						alt={`${v} 프로필 이미지`}
+					/>
+					<div className={titleCSS.name}>{v}</div>
+				</a>
+			</Link>
+		);
 	}
 
 	return (
 		<div>
 			<h3 className={titleCSS.listName}>감독</h3>
-			<ul className={titleCSS.list}>{casting(director)}</ul>
+			<ul className={titleCSS.list}>
+				{components.List(director, titleCSS.item, casting(director))}
+			</ul>
 			<h3 className={titleCSS.listName}>출연</h3>
-			<ul className={titleCSS.list}>{casting(allCasting)}</ul>
+			<ul className={titleCSS.list}>
+				{components.List(allCasting, titleCSS.item, casting(allCasting))}
+			</ul>
 		</div>
 	);
 };
 
-const Review = ({ data }) => {
+const Review = ({ data, review }) => {
+	function list(arr) {
+		arr.map;
+	}
 	return (
 		<div>
-			<span>asdf</span>
+			<h3>리뷰</h3>
+			<ul>
+				<li>리뷰 1</li>
+				<li>리뷰 2</li>
+				<li>리뷰 3</li>
+				<li>리뷰 4</li>
+				<li>리뷰 5</li>
+			</ul>
+			<button>리뷰 남기기</button>
+		</div>
+	);
+};
+
+const WriteReview = () => {
+	return (
+		<div className={titleCSS.writeReviewModal}>
+			<form
+				action=''
+				method='POST'
+				onSubmit={(e) => {
+					e.preventDefault();
+				}}
+			>
+				<textarea name='' id=''></textarea>
+				<button type='submit'>등록</button>
+			</form>
 		</div>
 	);
 };
