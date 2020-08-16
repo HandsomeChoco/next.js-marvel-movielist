@@ -62,25 +62,22 @@ class Join extends Component {
 	}
 	render() {
 		return (
-			<Layout
-				title={'Join to our universe'}
-				childComponent={
-					this.state.readTerms === false ? (
-						<Terms
-							handleState={this._handleTerms}
-							getTermsProp={this.state.terms}
-						/>
-					) : (
-						<JoinForm
-							_cancel={this._handleTerms}
-							handlePassWord={this._handlePassWord}
-							handleValidPassWord={this._handlePassWordCheck}
-							passwordProp={this.state.password}
-							passwordCheckProp={this.state.passwordCheck}
-						/>
-					)
-				}
-			/>
+			<Layout title={'Join to our universe'}>
+				{this.state.readTerms === false ? (
+					<Terms
+						handleState={this._handleTerms}
+						getTermsProp={this.state.terms}
+					/>
+				) : (
+					<JoinForm
+						_cancel={this._handleTerms}
+						handlePassWord={this._handlePassWord}
+						handleValidPassWord={this._handlePassWordCheck}
+						passwordProp={this.state.password}
+						passwordCheckProp={this.state.passwordCheck}
+					/>
+				)}
+			</Layout>
 		);
 	}
 }

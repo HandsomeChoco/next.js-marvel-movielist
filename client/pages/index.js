@@ -38,7 +38,7 @@ const Home = ({ movieList }) => {
 	}
 
 	console.log('Home Component render');
-	return <Layout title={'index'} childComponent={_renderMovieComponent()} />;
+	return <Layout title={'index'}>{_renderMovieComponent()}</Layout>;
 };
 
 const MovieList = ({ index, imageFileName, movieTitle }) => {
