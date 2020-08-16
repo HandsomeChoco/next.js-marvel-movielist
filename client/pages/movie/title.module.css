@@ -24,24 +24,37 @@
 	background-color: var(--color-white);
 }
 
+.runningTime {
+	padding-bottom: 10px;
+}
 .poster {
 	width: var(--imageSize);
 	border-radius: var(--num-radius);
 }
 .wrapper {
+	display: flex;
+	flex-direction: column;
 	background-color: none;
 }
 
 .titleWrap {
 	border-bottom: 1px solid var(--color-titleBorder);
 	margin: var(--num-ten-px);
+	margin-top: 0px;
 	width: 1fr;
 }
 
 .title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	text-align: center;
 	color: var(--color-black);
 	margin-bottom: var(--num-ten-px);
+}
+
+.degreeIcon {
+	width: 30px;
 }
 
 .kr {
@@ -67,12 +80,12 @@
 	align-items: center;
 	justify-content: center;
 	font-size: var(--num-tasty);
-	cursor: pointer;
 }
 
 .tasty svg {
 	height: calc(var(--num-tasty) - 5px);
 	margin-right: 10px;
+	cursor: pointer;
 }
 
 .like {
@@ -82,13 +95,14 @@
 .dislike {
 	color: var(--color-dislike);
 }
+
 .icon {
 	flex-grow: 1;
 }
-.runningTime {
-	flex-basis: 70px;
-}
 
+.star > span > svg {
+	height: 25px;
+}
 .listName {
 	font-weight: bold;
 	margin-left: var(--num-ten-px);

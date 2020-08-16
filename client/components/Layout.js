@@ -47,7 +47,7 @@ const Content = ({ children }) => {
 	return <div className={style.content}>{children}</div>;
 };
 
-const Layout = ({ childComponent, title }) => {
+const Layout = ({ children, title }) => {
 	const fontLink =
 		'https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap';
 	const footerItem = [
@@ -68,7 +68,7 @@ const Layout = ({ childComponent, title }) => {
 				<link href={fontLink} rel='stylesheet' />
 			</Head>
 			<Top alt={'메인으로 이동 합니다.'} />
-			<Content children={childComponent} />
+			<Content> {children}</Content>
 			<Footer items={footerItem} />
 		</div>
 	);

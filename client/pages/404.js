@@ -2,10 +2,9 @@ import Layout from '../components/Layout';
 import notFound from './404.module.css';
 export default function Custom404() {
 	return (
-		<Layout
-			title={'페이지를 찾을 수 없습니다.'}
-			childComponent={<NotFound />}
-		/>
+		<Layout title={'페이지를 찾을 수 없습니다.'}>
+			<NotFound />
+		</Layout>
 	);
 }
 
