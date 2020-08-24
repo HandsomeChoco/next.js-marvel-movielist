@@ -7,7 +7,7 @@ import Axios from 'axios';
 
 import FontAwesome, { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -38,16 +38,32 @@ export async function getServerSideProps(context) {
 const Movie = ({ data, review }) => {
 	const router = useRouter();
 	const { title } = router.query;
-	const [showWriteReview, handleWriteReview] = useState('hide'); // 리뷰 작성 모달 보여주기 & 숨기기
+	const [ writeReview, setWriteReview ] = useState({
+		isHide: true,
+		content: '',
+	}); // 리뷰 작성 모달 hide/show 토글 및 모달 내용 
+	
+	const onChangeReview = (e) => {
+		
+		const value = e.target.value;
+		setWriteReview({ 
+			content: value 
+		})
+	}
 
 	return (
 		<Layout title={`상세 정보: ${title}`}>
-			<Container data={data} />
+			<Container 
+				data={data} 
+				write={writeReview}
+				onChange={onChangeReview}
+			/>
 		</Layout>
 	);
 };
 
-const Container = ({ data }) => {
+const Container = ({ data, write, onChange }) => {
+	console.log(write)
 	return (
 		<>
 			<main className={titleCSS.container}>
@@ -58,7 +74,7 @@ const Container = ({ data }) => {
 				</content>
 			</main>
 			<Review data={data} />
-			<WriteReview />
+			<WriteReview onChange={onChange} />
 		</>
 	);
 };
@@ -71,15 +87,15 @@ const Article = ({ data }) => {
 
 	return (
 		<article className={titleCSS.wrapper}>
-			<div className={titleCSS.runningTime}>
-				{degree != 0 ? `${degree}세 관람가` : '등급 심사중'}, {runningTime}분
-			</div>
 			<img
 				src={`/imgs/poster/${imgFileName}`}
 				alt={title}
 				srcSet=''
 				className={titleCSS.poster}
 			/>
+			<div className={titleCSS.runningTime}>
+				{degree != 0 ? `${degree}세 관람가` : '등급 심사중'}, {runningTime}분
+			</div>
 			<Tasty data={data} />
 		</article>
 	);
@@ -186,12 +202,15 @@ const Review = ({ data, review }) => {
 				<li>리뷰 4</li>
 				<li>리뷰 5</li>
 			</ul>
-			<button>리뷰 남기기</button>
+			<div>
+				<button>리뷰 남기기</button>
+			</div>
 		</div>
 	);
 };
 
-const WriteReview = () => {
+const WriteReview = ({ onChange }) => {
+	const guideText = '여기에 리뷰를 작성하세요.'
 	return (
 		<div className={titleCSS.writeReviewModal}>
 			<form
@@ -200,8 +219,9 @@ const WriteReview = () => {
 				onSubmit={(e) => {
 					e.preventDefault();
 				}}
+				onChange={onChange}
 			>
-				<textarea name='' id=''></textarea>
+				<textarea name='' id='' placeholder={guideText}></textarea>
 				<button type='submit'>등록</button>
 			</form>
 		</div>

@@ -25,7 +25,8 @@
 }
 
 .runningTime {
-	padding-bottom: 10px;
+	padding-top: 10px;
+	text-align: center;
 }
 
 .poster {
@@ -146,12 +147,16 @@
 	text-align: center;
 	margin: var(--num-ten-px) 0px;
 }
+.reviewModal {
+	display: flex;
+	justify-content: center;
+}
 @media screen and (max-width: 500px) {
 	.container {
 		flex-direction: column;
 	}
 	.poster {
-		width: calc(var(--size-fitToLine));
+		width: 100%;
 		
 	}
 	.listWrapper {
