@@ -138,30 +138,35 @@ const Casting = ({ data }) => {
 	const mainCasting = data.mainCasting;
 	const allCasting = data.casting;
 
-	function casting(v) {
-		return (
-			<Link href={`/actor/${v}`}>
-				<a style={{ textDecoration: 'none' }}>
-					<img
-						className={titleCSS.profile}
-						src={`/imgs/actor/${v}.jfif`}
-						alt={`${v} 프로필 이미지`}
-					/>
-					<div className={titleCSS.name}>{v}</div>
-				</a>
-			</Link>
-		);
+	function List(arr)  {
+		const list = arr.map((v, i) => {
+			return (
+				<li key={i} className={titleCSS.item}>
+					<Link href={`/actor/${v}`}>
+						<a style={{ textDecoration: 'none' }}>
+							<img
+								className={titleCSS.profile}
+								src={`/imgs/actor/${v}.jfif`}
+								alt={`${v} 프로필 이미지`}
+							/>
+							<div className={titleCSS.name}>{v}</div>
+						</a>
+					</Link>
+				</li>
+			);
+		});
+		return list;
 	}
 
 	return (
-		<div>
+		<div className={titleCSS.listWrapper}>
 			<h3 className={titleCSS.listName}>감독</h3>
 			<ul className={titleCSS.list}>
-				{components.List(director, titleCSS.item, casting(director))}
+				{List(director)}
 			</ul>
 			<h3 className={titleCSS.listName}>출연</h3>
 			<ul className={titleCSS.list}>
-				{components.List(allCasting, titleCSS.item, casting(allCasting))}
+				{List(allCasting)}
 			</ul>
 		</div>
 	);
