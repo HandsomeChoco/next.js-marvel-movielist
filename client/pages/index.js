@@ -1,6 +1,11 @@
 import Link from 'next/link';
 import Layout from '../components/Layout';
 import indexCSS from './index.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { faHeart as borderLessHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as borderHeart } from '@fortawesome/free-regular-svg-icons';
+import { useState } from 'react';
 
 export async function getServerSideProps() {
 	const movieList = await fetch(
@@ -15,6 +20,10 @@ export async function getServerSideProps() {
 }
 
 const Home = ({ movieList }) => {
+	const { movielist } = movieList;
+	console.log(movielist)
+	const [heart, toggleHeart] = useState({...movieList._id});
+
 	function _renderMovie() {
 		const list = movieList.map((data, index) => {
 			return (
@@ -43,13 +52,20 @@ const Home = ({ movieList }) => {
 
 const MovieList = ({ index, imageFileName, movieTitle }) => {
 	console.log('MovieList Component render');
+	const heartStyle = {
+		color: 'white',
+		height: 20,
+	}
 	return (
 		<li className={indexCSS.movieListItem} key={index}>
 			<MovieImageAndLinkToMovie
 				movieTitle={movieTitle}
 				imageFileName={imageFileName}
 			/>
-			<h1>{movieTitle}</h1>
+			<h1>
+				<FontAwesomeIcon icon={borderLessHeart} style={heartStyle}/>&nbsp;
+				{movieTitle}
+			</h1>
 		</li>
 	);
 };
