@@ -19,18 +19,7 @@ const components = {
 				<FontAwesomeIcon icon={faStar} />
 			</span>
 		);
-	},
-
-	List: (arr, style = null, component) => {
-		const list = arr.map((v, i) => {
-			return (
-				<li key={i} className={style}>
-					{component}
-				</li>
-			);
-		});
-		return list;
-	},
+	}
 };
 
 export default components;
