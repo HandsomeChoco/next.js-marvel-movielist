@@ -1,7 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from '@fortawesome/free-regular-svg-icons';
-import func from './lib';
-import { text } from '@fortawesome/fontawesome-svg-core';
+import Link from 'next/link'
 
 const components = {
 	CreateIcon: (className = null, icon, css, prop) => {
@@ -13,13 +11,20 @@ const components = {
 		);
 	},
 
-	Star: () => {
-		return (
-			<span>
-				<FontAwesomeIcon icon={faStar} />
-			</span>
+	List: (className = null, arr, jsx) => {
+		let list;
+		
+		typeof arr !== 'object' ? new Error('파라미터 arr 은 배열이어야 합니다.') : (
+			list = arr.map((v, i) => {
+				return(
+					<li className={className} key={i}>
+						{jsx(v)}
+					</li>
+				);
+			})
 		);
-	}
+		return list;
+	},
 };
 
 export default components;
