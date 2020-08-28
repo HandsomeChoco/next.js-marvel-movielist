@@ -63,7 +63,6 @@ const Movie = ({ data, review }) => {
 };
 
 const Container = ({ data, write, onChange }) => {
-	console.log(write)
 	return (
 		<>
 			<main className={titleCSS.container}>
@@ -73,6 +72,7 @@ const Container = ({ data, write, onChange }) => {
 					<Casting data={data} />
 				</content>
 			</main>
+			<Trailer data={data} />
 			<Review data={data} />
 			<WriteReview onChange={onChange} />
 		</>
@@ -80,15 +80,13 @@ const Container = ({ data, write, onChange }) => {
 };
 
 const Article = ({ data }) => {
-	const imgFileName = data.imageFileName;
-	const title = data.title;
-	const degree = data.degree;
-	const runningTime = data.runningTime;
+	const { imageFileName, title, degree, runningTime } = data;
+
 
 	return (
 		<article className={titleCSS.wrapper}>
 			<img
-				src={`/imgs/poster/${imgFileName}`}
+				src={`/imgs/poster/${imageFileName}`}
 				alt={title}
 				srcSet=''
 				className={titleCSS.poster}
@@ -102,10 +100,7 @@ const Article = ({ data }) => {
 };
 
 const Tasty = ({ data }) => {
-	const likes = data.likes.length;
-	const dislikes = data.dislikes.length;
-	const runningTime = data.runningTime;
-	const score = data.score;
+	const { likes, dislikes, runningTime, score } = data;
 	const noScore = '아직 평가가 없습니다.';
 
 	return (
@@ -116,13 +111,13 @@ const Tasty = ({ data }) => {
 						titleCSS.icon,
 						faThumbsUp,
 						titleCSS.like,
-						lib.kFormatter(likes)
+						lib.kFormatter(likes.length)
 					)}
 					{components.CreateIcon(
 						titleCSS.icon,
 						faThumbsDown,
 						titleCSS.dislike,
-						lib.kFormatter(dislikes)
+						lib.kFormatter(dislikes.length)
 					)}
 				</div>
 				<div>평점: {lib.showText(score, noScore)} </div>
@@ -132,9 +127,8 @@ const Tasty = ({ data }) => {
 };
 
 const Titles = ({ data }) => {
-	const year = moment(data.year).format('YYYY');
-	const title = data.title;
-	const enTitle = data.enTitle;
+	const { year, title, enTitle } = data;
+	const _year = moment(year).format('YYYY');
 	const errText = '제목 정보를 가져오지 못했습니다.';
 
 	return (
@@ -143,55 +137,51 @@ const Titles = ({ data }) => {
 				<span>{lib.showText(title, errText)}</span>
 			</h3>
 			<h6 className={`${titleCSS.title} ${titleCSS.en}`}>
-				{lib.showText(enTitle, errText)}, ({year})
+				{lib.showText(enTitle, errText)}, ({_year})
 			</h6>
 		</header>
 	);
 };
 
 const Casting = ({ data }) => {
-	const director = data.director;
-	const mainCasting = data.mainCasting;
-	const allCasting = data.casting;
+	const { director, casting } = data;
 
-	function List(arr)  {
-		const list = arr.map((v, i) => {
-			return (
-				<li key={i} className={titleCSS.item}>
-					<Link href={`/actor/${v}`}>
-						<a style={{ textDecoration: 'none' }}>
-							<img
-								className={titleCSS.profile}
-								src={`/imgs/actor/${v}.jfif`}
-								alt={`${v} 프로필 이미지`}
-							/>
-							<div className={titleCSS.name}>{v}</div>
-						</a>
-					</Link>
-				</li>
-			);
-		});
-		return list;
+	const list = (v) => {
+		return(
+			<Link href={`/actor/${v}`}>
+				<a style={{ textDecoration: 'none' }}>
+				<img
+					className={titleCSS.profile}
+					src={`/imgs/actor/${v}.jfif`}
+					alt={`${v} 프로필 이미지`}
+				/>
+				<div className={titleCSS.name}>{v}</div>
+				</a>
+			</Link>
+		);
 	}
-
+	
 	return (
 		<div className={titleCSS.listWrapper}>
 			<h3 className={titleCSS.listName}>감독</h3>
 			<ul className={titleCSS.list}>
-				{List(director)}
+				{components.List(titleCSS.item, director, list)}
 			</ul>
 			<h3 className={titleCSS.listName}>출연</h3>
 			<ul className={titleCSS.list}>
-				{List(allCasting)}
+				{components.List(titleCSS.item, casting, list)}
 			</ul>
 		</div>
 	);
 };
 
+const Trailer = ({ data }) => {
+	return (
+		<div dangerouslySetInnerHTML={{__html: data.trailer}}/>
+	);
+}
 const Review = ({ data, review }) => {
-	function list(arr) {
-		arr.map;
-	}
+	
 	return (
 		<div>
 			<h3>리뷰</h3>
@@ -203,7 +193,7 @@ const Review = ({ data, review }) => {
 				<li>리뷰 5</li>
 			</ul>
 			<div>
-				<button>리뷰 남기기</button>
+				<button>리뷰 쓰기</button>
 			</div>
 		</div>
 	);
