@@ -20,9 +20,6 @@ export async function getServerSideProps() {
 }
 
 const Home = ({ movieList }) => {
-	const { movielist } = movieList;
-	console.log(movielist)
-	const [heart, toggleHeart] = useState({...movieList._id});
 
 	function _renderMovie() {
 		const list = movieList.map((data, index) => {
@@ -47,7 +44,7 @@ const Home = ({ movieList }) => {
 	}
 
 	console.log('Home Component render');
-	return <Layout title={'index'}>{_renderMovieComponent()}</Layout>;
+	return <Layout title={'영화 목록'}>{_renderMovieComponent()}</Layout>;
 };
 
 const MovieList = ({ index, imageFileName, movieTitle }) => {
@@ -63,7 +60,7 @@ const MovieList = ({ index, imageFileName, movieTitle }) => {
 				imageFileName={imageFileName}
 			/>
 			<h1>
-				<FontAwesomeIcon icon={borderLessHeart} style={heartStyle}/>&nbsp;
+				{/* <FontAwesomeIcon icon={borderLessHeart} style={heartStyle}/>&nbsp; */}
 				{movieTitle}
 			</h1>
 		</li>

@@ -46,16 +46,6 @@
 	padding: 5px 0px;
 }
 
-.movieMetaData {
-	display: grid;
-	padding: 5px;
-	grid-template-columns: 50% 50%;
-}
-
-.movieMetaData div svg {
-	height: 16px;
-}
-
 @media screen and (min-width: 3001px) {
 	.movieListItem {
 		width: calc(10% - var(--minus-border));
