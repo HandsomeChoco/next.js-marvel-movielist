@@ -23,7 +23,9 @@
 	width: calc(--viewport - 20px);
 	background-color: var(--color-white);
 }
-
+.container > content {
+	border-bottom: 1px solid var(--color-titleBorder);
+}
 .runningTime {
 	padding-top: 10px;
 	text-align: center;
@@ -38,12 +40,12 @@
 	display: flex;
 	flex-direction: column;
 	background-color: none;
+	border-bottom: 1px solid var(--color-titleBorder);
 }
 
 .titleWrap {
 	border-bottom: 1px solid var(--color-titleBorder);
-	margin: var(--num-ten-px);
-	margin-top: 0px;
+	margin-left: var(--num-ten-px);
 	width: 1fr;
 }
 
@@ -72,10 +74,10 @@
 }
 
 .tasty {
-	margin: var(--num-ten-px) 0px;
+	padding: var(--num-ten-px);
 	display: flex;
 	justify-content: space-between;
-	border: 1px solid black;
+	border-bottom: 1px solid var(--color-titleBorder);
 }
 
 .tasty div {
@@ -111,14 +113,15 @@
 	padding-left: var(--num-ten-px);
 }
 .listName {
+	padding-top: var(--num-ten-px);
 	font-weight: bold;
+	text-align: center;
 }
 .list {
 	display: flex;
 	width: calc(var(--viewport) - var(--imageSize) - 50px);
 	max-width: calc(var(--size-layoutMax) - var(--imageSize) - 40px);
 	overflow: auto;
-	border-bottom: 1px solid var(--color-titleBorder);
 	-ms-overflow-style: none; /* IE and Edge */
 	scrollbar-width: none; /* Firefox */
 }
@@ -133,6 +136,10 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+.item:nth-last-child(1) {
+	margin-right: 0px;
+}
+
 .profile {
 	border-radius: 100%;
 	width: 110px;
@@ -141,15 +148,67 @@
 	border: 2px solid var(--color-black);
 	object-fit: fill;
 }
-.name {
+.actorName {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	text-align: center;
 	margin: var(--num-ten-px) 0px;
 }
+
+.trailer, .synopsis, .review {
+	padding: var(--num-ten-px) 0px;
+	border-bottom: 1px solid var(--color-titleBorder);
+}
+
+.reviewBtnWrapper {
+	display: flex;
+	justify-content: center;
+}
+.reviewBtnWrapper > button {
+	min-width: 320px;
+	max-width: 500px;
+	background-color: rgb(237, 29, 36);
+	border: none;
+	color: var(--color-white);
+	font-weight: bold;
+	font-size: 20px;
+	padding: var(--num-ten-px) 0px;
+}
+.trailer > div {
+	text-align: center;
+}
+
+.synopsis > h3, .trailer > h3, .review > h3 {
+	font-weight: bold;
+	font-size: 25px;
+	text-align: center;
+	padding-bottom: calc(var(--num-ten-px) * 4);
+	padding-top: calc(var(--num-ten-px) * 2) ;
+}
+
+.reviewList > li {
+	display: flex;
+	border: 2px solid gray;
+	padding: var(--num-ten-px);
+	margin: var(--num-ten-px) 0px;
+	justify-content: space-between;
+}
 .reviewModal {
 	display: flex;
 	justify-content: center;
+}
+.writeReviewModal {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	left: 0;
+	top: 0;
+}
+@media screen and (max-width: 580px) {
+	.trailer > div > iframe {
+		width: var(--size-fitToLine);
+		height: 290px;
+	}
 }
 @media screen and (max-width: 500px) {
 	.container {
@@ -163,6 +222,6 @@
 		padding-left: 0px;
 	}
 	.list {
-		width: var(--size-fitToLine);
+		width: calc(var(--size-fitToLine) + 4px);
 	}
 }

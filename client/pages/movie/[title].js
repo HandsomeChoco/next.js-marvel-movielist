@@ -39,16 +39,27 @@ const Movie = ({ data, review }) => {
 	const router = useRouter();
 	const { title } = router.query;
 	const [ writeReview, setWriteReview ] = useState({
-		isHide: true,
+		isHide: false,
 		content: '',
 	}); // 리뷰 작성 모달 hide/show 토글 및 모달 내용 
-	
+	const { isHide, content } = writeReview;
+
 	const onChangeReview = (e) => {
-		
 		const value = e.target.value;
 		setWriteReview({ 
+			isHide,
 			content: value 
-		})
+		});
+	};
+
+	const onToggleView = () => {
+		setWriteReview({
+			isHide: true,
+			content: content
+		});
+	}
+	const onChange  = (e) => {
+		e.preventDefault();
 	}
 
 	return (
@@ -57,12 +68,15 @@ const Movie = ({ data, review }) => {
 				data={data} 
 				write={writeReview}
 				onChange={onChangeReview}
+				onToggleView={onToggleView}
+				isHide={isHide}
+				onChange={onChange}
 			/>
 		</Layout>
 	);
 };
 
-const Container = ({ data, write, onChange }) => {
+const Container = ({ data, onCreate, onChange, onToggleView, isHide, onSubmit }) => {
 	return (
 		<>
 			<main className={titleCSS.container}>
@@ -72,16 +86,25 @@ const Container = ({ data, write, onChange }) => {
 					<Casting data={data} />
 				</content>
 			</main>
+			<Tasty data={data} />
+			<Synopsis data={data} />
 			<Trailer data={data} />
-			<Review data={data} />
-			<WriteReview onChange={onChange} />
+			<Review 
+				data={data} 
+				onToggleView={onToggleView}
+				isHide={isHide}
+			>
+				<WriteReview 
+					onChange={onChange} 
+					onSubmit={onSubmit}
+				/>
+			</Review>
 		</>
 	);
 };
 
 const Article = ({ data }) => {
-	const { imageFileName, title, degree, runningTime } = data;
-
+	const { imageFileName, title, degree, runningTime, synopsis } = data;
 
 	return (
 		<article className={titleCSS.wrapper}>
@@ -94,14 +117,13 @@ const Article = ({ data }) => {
 			<div className={titleCSS.runningTime}>
 				{degree != 0 ? `${degree}세 관람가` : '등급 심사중'}, {runningTime}분
 			</div>
-			<Tasty data={data} />
+			
 		</article>
 	);
 };
 
 const Tasty = ({ data }) => {
 	const { likes, dislikes, runningTime, score } = data;
-	const noScore = '아직 평가가 없습니다.';
 
 	return (
 		<div>
@@ -120,7 +142,6 @@ const Tasty = ({ data }) => {
 						lib.kFormatter(dislikes.length)
 					)}
 				</div>
-				<div>평점: {lib.showText(score, noScore)} </div>
 			</div>
 		</div>
 	);
@@ -155,7 +176,7 @@ const Casting = ({ data }) => {
 					src={`/imgs/actor/${v}.jfif`}
 					alt={`${v} 프로필 이미지`}
 				/>
-				<div className={titleCSS.name}>{v}</div>
+				<div className={titleCSS.actorName}>{v}</div>
 				</a>
 			</Link>
 		);
@@ -177,44 +198,62 @@ const Casting = ({ data }) => {
 
 const Trailer = ({ data }) => {
 	return (
-		<div dangerouslySetInnerHTML={{__html: data.trailer}}/>
+		<div className={titleCSS.trailer}>
+			<h3>예고편 및 미리보기</h3>
+			<div dangerouslySetInnerHTML={{__html: data.trailer}}/>
+		</div>
 	);
 }
-const Review = ({ data, review }) => {
+const Review = ({ data, review, onToggleView, isHide, children }) => {
 	
 	return (
-		<div>
+		<div className={titleCSS.review}>
 			<h3>리뷰</h3>
-			<ul>
-				<li>리뷰 1</li>
+			<ul className={titleCSS.reviewList}>
+				<li><div>리뷰 1</div>
+				<div>아이콘</div></li>
 				<li>리뷰 2</li>
 				<li>리뷰 3</li>
 				<li>리뷰 4</li>
 				<li>리뷰 5</li>
 			</ul>
-			<div>
-				<button>리뷰 쓰기</button>
+			<div className={titleCSS.reviewBtnWrapper}>
+				<button onClick={onToggleView}>리뷰 쓰기</button>
+			</div>
+			<div 
+				className={titleCSS.writeReviewModal}
+				style={isHide ? { display: 'block' } : { display: 'none' } }
+			>
+				{children}
 			</div>
 		</div>
 	);
 };
 
-const WriteReview = ({ onChange }) => {
+const Synopsis = ({data}) => {
+	const { synopsis } = data;
+	return(
+		<div className={titleCSS.synopsis}>
+			<h3>줄거리</h3>
+			<div>
+				<p dangerouslySetInnerHTML={{__html: synopsis ? synopsis : '등록된 줄거리가 없습니다'}}></p>
+			</div>
+		</div>
+	)
+}
+
+const WriteReview = ({ onChange, onSubmit }) => {
 	const guideText = '여기에 리뷰를 작성하세요.'
 	return (
-		<div className={titleCSS.writeReviewModal}>
-			<form
-				action=''
-				method='POST'
-				onSubmit={(e) => {
-					e.preventDefault();
-				}}
-				onChange={onChange}
-			>
-				<textarea name='' id='' placeholder={guideText}></textarea>
-				<button type='submit'>등록</button>
-			</form>
-		</div>
+		<form
+			action=''
+			method='POST'
+			onSubmit={onSubmit}
+			onChange={onChange}
+		>
+			<textarea name='' id='' placeholder={guideText}></textarea>
+			<button type='submit'>등록</button>
+		</form>
 	);
 };
 
