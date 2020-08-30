@@ -1,5 +1,6 @@
 #container {
 	font-family: 'Noto Sans KR', sans-serif;
+	border: 1px solid black;
 	max-width: 3000px;
 	margin: auto;
 	background-color: white;
@@ -23,7 +24,7 @@
 
 .nav > div > svg {
 	height: 25px;
-	width: 25px;
+	width: 25px !important;
 	padding: 5px;
 	color: #ffffff;
 	vertical-align: middle;
