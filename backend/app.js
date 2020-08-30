@@ -1,13 +1,17 @@
-const createError = require('http-errors');
 const express = require('express');
+const app = express();
+
+const createError = require('http-errors');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const apiRouter = require('./routes/api');
-const app = express();
 const cors = require('cors');
+
+
+const movieApiRouter = require('./routes/api/movie');
+const policyApiRouter = require('./routes/api/policy');
+const usersApiRouter = require('./routes/api/user');
+const reviewApiRouter = require('./routes/api/review');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,11 +29,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('api/', (cors(corsOption), async(req, res, next) => { }));
+app.use('/api/users', usersApiRouter);
+app.use('/api/movie', movieApiRouter);
+app.use('/api/policy', policyApiRouter);
+app.use('/api/review', reviewApiRouter);
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/api', apiRouter);
+app.get('/api/users', (cors(corsOption), async(req, res, next) => { }));
+app.get('/api/movie', (cors(corsOption), async(req, res, next) => { }));
+app.get('/api/policy', (cors(corsOption), async(req, res, next) => { }));
+app.get('/api/review', (cors(corsOption), async(req, res, next) => { }));
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
