@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { movie } = require('../../model');
+const { connectDB, movie } = require('../../model');
+
+connectDB;
 
 router.get('/', async (req, res, next) => {
 	let page = req.params.page;
@@ -30,7 +32,7 @@ router.get('/search/:name', async (req, res, next) => {
 	if (getMovie.length >= 1) {
 		return res.json(getMovie);
 	}
-	return res.status(404).send(null);
+	return res.status(404).send({});
 });
 
 
