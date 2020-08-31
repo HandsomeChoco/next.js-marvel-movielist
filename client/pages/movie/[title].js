@@ -5,8 +5,9 @@ import lib from '../../components/lib/lib';
 import moment from 'moment';
 import Axios from 'axios';
 
-import FontAwesome, { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faThumbsUp, faThumbsDown, } from '@fortawesome/free-regular-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -14,34 +15,29 @@ import { useRouter } from 'next/router';
 export async function getServerSideProps(context) {
 	let data, review;
 	try {
-		data = await fetch(
-			`http://10.10.12.3:4000/api/movie/${encodeURIComponent(
-				context.params.title
-			)}`
-		).then((response) => response.json());
-
-		review = await fetch(`http://10.10.12.3:4000/api/review`).then((response) =>
-			response.json()
-		);
+		data = await Axios.get(
+			`http://10.10.12.3:4000/api/movie/${encodeURIComponent(context.params.title)}`
+		)
 	} catch (err) {
 		return err;
 	}
-
+	
 	return {
 		props: {
-			data: data[0],
-			review,
+			data: data.data[0],
 		},
 	};
 }
 
 const Movie = ({ data, review }) => {
+	console.log(data);
 	const router = useRouter();
 	const { title } = router.query;
 	const [ writeReview, setWriteReview ] = useState({
 		isHide: false,
 		content: '',
 	}); // 리뷰 작성 모달 hide/show 토글 및 모달 내용 
+	
 	const { isHide, content } = writeReview;
 
 	const onChangeReview = (e) => {
@@ -52,23 +48,24 @@ const Movie = ({ data, review }) => {
 		});
 	};
 
-	const onToggleView = () => {
+	const onModalView = () => {
 		setWriteReview({
-			isHide: true,
+			isHide: !isHide,
 			content: content
 		});
 	}
+
 	const onChange  = (e) => {
 		e.preventDefault();
 	}
-
+	
 	return (
 		<Layout title={`상세 정보: ${title}`}>
 			<Container 
 				data={data} 
 				write={writeReview}
 				onChange={onChangeReview}
-				onToggleView={onToggleView}
+				onModalView={onModalView}
 				isHide={isHide}
 				onChange={onChange}
 			/>
@@ -76,7 +73,7 @@ const Movie = ({ data, review }) => {
 	);
 };
 
-const Container = ({ data, onCreate, onChange, onToggleView, isHide, onSubmit }) => {
+const Container = ({ data, onCreate, onChange, onModalView, isHide, onSubmit }) => {
 	return (
 		<>
 			<main className={titleCSS.container}>
@@ -91,12 +88,13 @@ const Container = ({ data, onCreate, onChange, onToggleView, isHide, onSubmit })
 			<Trailer data={data} />
 			<Review 
 				data={data} 
-				onToggleView={onToggleView}
+				onModalView={onModalView}
 				isHide={isHide}
 			>
 				<WriteReview 
 					onChange={onChange} 
 					onSubmit={onSubmit}
+					onClick={onModalView}
 				/>
 			</Review>
 		</>
@@ -196,40 +194,6 @@ const Casting = ({ data }) => {
 	);
 };
 
-const Trailer = ({ data }) => {
-	return (
-		<div className={titleCSS.trailer}>
-			<h3>예고편 및 미리보기</h3>
-			<div dangerouslySetInnerHTML={{__html: data.trailer}}/>
-		</div>
-	);
-}
-const Review = ({ data, review, onToggleView, isHide, children }) => {
-	
-	return (
-		<div className={titleCSS.review}>
-			<h3>리뷰</h3>
-			<ul className={titleCSS.reviewList}>
-				<li><div>리뷰 1</div>
-				<div>아이콘</div></li>
-				<li>리뷰 2</li>
-				<li>리뷰 3</li>
-				<li>리뷰 4</li>
-				<li>리뷰 5</li>
-			</ul>
-			<div className={titleCSS.reviewBtnWrapper}>
-				<button onClick={onToggleView}>리뷰 쓰기</button>
-			</div>
-			<div 
-				className={titleCSS.writeReviewModal}
-				style={isHide ? { display: 'block' } : { display: 'none' } }
-			>
-				{children}
-			</div>
-		</div>
-	);
-};
-
 const Synopsis = ({data}) => {
 	const { synopsis } = data;
 	return(
@@ -242,18 +206,73 @@ const Synopsis = ({data}) => {
 	)
 }
 
-const WriteReview = ({ onChange, onSubmit }) => {
+
+const Trailer = ({ data }) => {
+	return (
+		<div className={titleCSS.trailer}>
+			<h3>예고편 및 미리보기</h3>
+			<div dangerouslySetInnerHTML={{__html: data.trailer}}/>
+		</div>
+	);
+}
+
+const Review = ({ data, review, onModalView, isHide, children }) => {
+	const toggleModal = isHide ? { display: 'flex' } : { display: 'none' };
+	return (
+		<div className={titleCSS.review}>
+			<h3>리뷰</h3>
+			<div className={titleCSS.reviewBtnWrapper}>
+				<button onClick={onModalView}>리뷰 쓰기</button>
+			</div>
+			<ul className={titleCSS.reviewList}>
+				<li>
+					<div>리뷰 1</div><div>아이콘</div>
+				</li>
+				<li>리뷰 2</li>
+				<li>리뷰 3</li>
+				<li>리뷰 4</li>
+				<li>리뷰 5</li>
+			</ul>
+			<div 
+				className={titleCSS.overlay}
+				style={toggleModal}
+			>
+			</div>
+			<div 
+				className={titleCSS.writeReviewModal}
+				style={toggleModal}
+			>
+				{children}
+			</div>
+		</div>
+	);
+};
+
+const WriteReview = ({ onChange, onSubmit, onClick }) => {
 	const guideText = '여기에 리뷰를 작성하세요.'
 	return (
-		<form
-			action=''
-			method='POST'
-			onSubmit={onSubmit}
-			onChange={onChange}
-		>
-			<textarea name='' id='' placeholder={guideText}></textarea>
-			<button type='submit'>등록</button>
-		</form>
+		<>	
+			<div>
+				<FontAwesomeIcon icon={faTimes} onClick={onClick} />
+			</div>
+			
+			<h3>리뷰 작성</h3>
+			<form
+				action=''
+				method='POST'
+				onSubmit={onSubmit}
+				onChange={onChange}
+			>
+				<textarea 
+					name='' 
+					id='' 
+					placeholder={guideText}
+				/>
+
+				<button type='submit'>등록</button>
+			</form>
+		</>
+		
 	);
 };
 

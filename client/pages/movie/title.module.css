@@ -193,16 +193,47 @@
 	margin: var(--num-ten-px) 0px;
 	justify-content: space-between;
 }
-.reviewModal {
-	display: flex;
-	justify-content: center;
-}
-.writeReviewModal {
-	position: absolute;
+.overlay {
+	position: fixed;
 	width: 100vw;
 	height: 100vh;
 	left: 0;
 	top: 0;
+	z-index: 2;
+	opacity: 0.7;
+	background-color: black;
+}
+.writeReviewModal {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	left: 0;
+	top: 0;
+	z-index: 3;
+	flex-direction: column;
+}
+
+.writeReviewModal > div {
+	border: var(--test-border);
+}
+.writeReviewModal > div > svg {
+	color: white;
+	width: 25px;
+	height: 25px;
+}
+
+.writeReviewModal > h3 {
+
+}
+.writeReviewModal > form {
+	display: flex;
+	flex-direction: column;
+	min-width: 320px;
+	max-width: 3000px;
+	border-radius: var(--num-radius);
 }
 @media screen and (max-width: 580px) {
 	.trailer > div > iframe {
