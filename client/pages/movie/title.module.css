@@ -2,7 +2,7 @@
 	--color-white: rgb(255, 255, 255);
 	--color-black: rgb(0, 0, 0);
 	--color-enTitle: rgb(118, 118, 118);
-	--color-like: rgb(237, 29, 36);
+	--color-like: rgb(237, 29, 36); /* 이 색은 nav 색과도 동일 */
 	--color-dislike: rgb(41, 151, 255);
 	--color-titleBorder: rgb(240, 240, 240);
 	--num-subTitle: 12px;
@@ -165,8 +165,7 @@
 	justify-content: center;
 }
 .reviewBtnWrapper > button {
-	min-width: 320px;
-	max-width: 500px;
+	width: 568px;
 	background-color: rgb(237, 29, 36);
 	border: none;
 	color: var(--color-white);
@@ -216,29 +215,41 @@
 	flex-direction: column;
 }
 
-.writeReviewModal > div {
-	border: var(--test-border);
+.writeReviewModal > form {
+	padding: 10px;
 }
-.writeReviewModal > div > svg {
-	color: white;
+.closeModalWrap {
+	text-align: right;
+}
+.closeModalWrap > svg {
+	color: black;
 	width: 25px;
 	height: 25px;
 }
 
-.writeReviewModal > h3 {
-
+.writeReviewModal form > h3 {
+	font-size: var(--num-title);
+	font-weight: bold;
 }
 .writeReviewModal > form {
 	display: flex;
 	flex-direction: column;
-	min-width: 320px;
-	max-width: 3000px;
+	width: 50vw;
+	height: 50vh;
 	border-radius: var(--num-radius);
+	background-color: var(--color-white);
 }
 @media screen and (max-width: 580px) {
 	.trailer > div > iframe {
+		width: calc(var(--size-fitToLine) + 20px);
+		min-height: 200px;
+		max-height: 300px;
+	}
+	.reviewBtnWrapper > button {
+		width: calc(var(--size-fitToLine) + 20px);
+	}
+	.writeReviewModal > form { 
 		width: var(--size-fitToLine);
-		height: 290px;
 	}
 }
 @media screen and (max-width: 500px) {

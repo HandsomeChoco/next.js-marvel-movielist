@@ -252,17 +252,16 @@ const WriteReview = ({ onChange, onSubmit, onClick }) => {
 	const guideText = '여기에 리뷰를 작성하세요.'
 	return (
 		<>	
-			<div>
-				<FontAwesomeIcon icon={faTimes} onClick={onClick} />
-			</div>
-			
-			<h3>리뷰 작성</h3>
 			<form
 				action=''
 				method='POST'
 				onSubmit={onSubmit}
 				onChange={onChange}
 			>
+				<div className={titleCSS.closeModalWrap}>
+				<FontAwesomeIcon icon={faTimes} onClick={onClick} />
+				</div>
+				<h3>리뷰 작성</h3>
 				<textarea 
 					name='' 
 					id='' 
