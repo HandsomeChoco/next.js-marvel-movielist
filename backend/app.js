@@ -7,7 +7,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 
-const indexRouter = require('./routes/index');
 const movieApiRouter = require('./routes/api/movie');
 const policyApiRouter = require('./routes/api/policy');
 const usersApiRouter = require('./routes/api/user');
@@ -29,7 +28,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
 app.use('/api/user', usersApiRouter);
 app.use('/api/movie', movieApiRouter);
 app.use('/api/policy', policyApiRouter);
