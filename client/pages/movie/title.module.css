@@ -27,7 +27,7 @@
 	border-bottom: 1px solid var(--color-titleBorder);
 }
 .runningTime {
-	padding-top: 10px;
+	padding: var(--num-ten-px) 0px;
 	text-align: center;
 }
 
@@ -172,6 +172,7 @@
 	font-weight: bold;
 	font-size: 20px;
 	padding: var(--num-ten-px) 0px;
+	border-radius: var(--num-radius);
 }
 .trailer > div {
 	text-align: center;
@@ -225,20 +226,45 @@
 	color: black;
 	width: 25px;
 	height: 25px;
+	cursor: pointer;
+}
+
+.closeModalWrap > svg:hover {
+	color: var(--color-like);
 }
 
 .writeReviewModal form > h3 {
+	text-align: center;
 	font-size: var(--num-title);
 	font-weight: bold;
+	padding: var(--num-ten-px) 0px 20px 0px;
 }
 .writeReviewModal > form {
 	display: flex;
 	flex-direction: column;
-	width: 50vw;
-	height: 50vh;
+	width: 80vw;
 	border-radius: var(--num-radius);
 	background-color: var(--color-white);
 }
+.writeReviewModal > form > textarea {
+	padding: var(--num-ten-px);
+	height: 75px;
+	margin-bottom: var(--num-ten-px);
+	border-radius: var(--num-radius);
+}
+
+.writeReviewModal > form > button {
+	background-color: var(--color-like);
+	color: var(--color-white);
+	font-weight: bold;
+	font-size: 20px;
+	padding: var(--num-ten-px) 0px;
+	border: none;
+	border-radius: var(--num-radius);
+	margin-top: var(--num-ten-px);
+}
+
+
 @media screen and (max-width: 580px) {
 	.trailer > div > iframe {
 		width: calc(var(--size-fitToLine) + 20px);

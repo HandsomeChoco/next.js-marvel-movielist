@@ -1,13 +1,17 @@
+// 내가 만든 코드들
 import Layout from '../../components/Layout';
 import titleCSS from './title.module.css';
 import components from '../../components/lib/component';
 import lib from '../../components/lib/lib';
+
+// 남이 만든 라이브러리 
 import moment from 'moment';
 import Axios from 'axios';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown, } from '@fortawesome/free-regular-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
+
+// 넥스트 & 리액트
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -30,15 +34,14 @@ export async function getServerSideProps(context) {
 }
 
 const Movie = ({ data, review }) => {
-	console.log(data);
 	const router = useRouter();
 	const { title } = router.query;
 	const [ writeReview, setWriteReview ] = useState({
 		isHide: false,
 		content: '',
 	}); // 리뷰 작성 모달 hide/show 토글 및 모달 내용 
-	
 	const { isHide, content } = writeReview;
+	const write = useRef();
 
 	const onChangeReview = (e) => {
 		const value = e.target.value;
@@ -51,14 +54,17 @@ const Movie = ({ data, review }) => {
 	const onModalView = () => {
 		setWriteReview({
 			isHide: !isHide,
-			content: content
+			content
 		});
 	}
 
-	const onChange  = (e) => {
-		e.preventDefault();
+	const onChange = (e) => {
+		
 	}
 	
+	const onCreate = () => {
+
+	}
 	return (
 		<Layout title={`상세 정보: ${title}`}>
 			<Container 
@@ -68,12 +74,14 @@ const Movie = ({ data, review }) => {
 				onModalView={onModalView}
 				isHide={isHide}
 				onChange={onChange}
+				onChangeReview={onChangeReview}
+				content={content}
 			/>
 		</Layout>
 	);
 };
 
-const Container = ({ data, onCreate, onChange, onModalView, isHide, onSubmit }) => {
+const Container = ({ data, onCreate, onChange, onModalView, isHide, onSubmit, onChangeReview, content }) => {
 	return (
 		<>
 			<main className={titleCSS.container}>
@@ -95,6 +103,8 @@ const Container = ({ data, onCreate, onChange, onModalView, isHide, onSubmit }) 
 					onChange={onChange} 
 					onSubmit={onSubmit}
 					onClick={onModalView}
+					onChange={onChangeReview}
+					content={content}
 				/>
 			</Review>
 		</>
@@ -102,7 +112,7 @@ const Container = ({ data, onCreate, onChange, onModalView, isHide, onSubmit }) 
 };
 
 const Article = ({ data }) => {
-	const { imageFileName, title, degree, runningTime, synopsis } = data;
+	const { imageFileName, title, degree, runningTime } = data;
 
 	return (
 		<article className={titleCSS.wrapper}>
@@ -248,8 +258,9 @@ const Review = ({ data, review, onModalView, isHide, children }) => {
 	);
 };
 
-const WriteReview = ({ onChange, onSubmit, onClick }) => {
-	const guideText = '여기에 리뷰를 작성하세요.'
+const WriteReview = ({ onChange, onSubmit, onClick, onChangeReview, content, onCreate }) => {
+	const placeholder = '여기에 내용을 입력하세요';
+	const desc = '리뷰 작성 창을 닫습니다.'
 	return (
 		<>	
 			<form
@@ -263,12 +274,17 @@ const WriteReview = ({ onChange, onSubmit, onClick }) => {
 				</div>
 				<h3>리뷰 작성</h3>
 				<textarea 
-					name='' 
-					id='' 
-					placeholder={guideText}
+					name="" 
+					cols="30" 
+					rows="10" 
+					placeholder={placeholder}
+					onChange={onChangeReview}
+					maxLength={300}
 				/>
+				<div style={{textAlign: 'right'}}>{`${content.length}/300`}</div>
+				
 
-				<button type='submit'>등록</button>
+				<button type='submit' onClick={onCreate}>등록</button>
 			</form>
 		</>
 		
