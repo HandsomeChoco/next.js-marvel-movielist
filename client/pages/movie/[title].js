@@ -12,7 +12,7 @@ import { faThumbsUp, faThumbsDown, } from '@fortawesome/free-regular-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 // 넥스트 & 리액트
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useReducer } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -33,55 +33,94 @@ export async function getServerSideProps(context) {
 	};
 }
 
+const initialState = {
+	modal: {
+		isHidden: true,
+		content: '',
+	},
+}
+
+function reducer(state, action) {
+	console.log('reducewr')
+	console.log(state)
+    switch(action.type) {
+        case 'ON_CHANGE_REVIEW': 
+            return {
+				...state,
+				modal: {
+					content: action.content,
+					isHidden: action.isHidden
+				}
+			}
+		case 'ON_MODAL_VIEW':
+			return {
+				...state, 
+				modal: {
+					content: action.content,
+					isHidden: action.isHidden
+				}
+			}
+		case 'ON_CREATE_REVIEW': 
+			return {
+				modal: {
+					content: initialState.content,
+					isHidden: action.isHidden
+				}
+			}
+		default : return state;
+    }
+}
+
 const Movie = ({ data, review }) => {
 	const router = useRouter();
 	const { title } = router.query;
-	const [ writeReview, setWriteReview ] = useState({
-		isHide: false,
-		content: '',
-	}); // 리뷰 작성 모달 hide/show 토글 및 모달 내용 
-	const { isHide, content } = writeReview;
-	const write = useRef();
+	const [ state, dispatch ] = useReducer(reducer, initialState ); // 리뷰 작성 모달 hide/show 토글 및 모달 내용 
+	const { isHidden, content } = state.modal;
 
 	const onChangeReview = (e) => {
 		const value = e.target.value;
-		setWriteReview({ 
-			isHide,
-			content: value 
+		dispatch({ 
+			type: 'ON_CHANGE_REVIEW',
+			isHidden,
+			content: value,
 		});
 	};
 
 	const onModalView = () => {
-		setWriteReview({
-			isHide: !isHide,
+		dispatch({
+			type: 'ON_MODAL_VIEW',
+			isHidden: !isHidden,
 			content
 		});
 	}
-
-	const onChange = (e) => {
-		
-	}
 	
-	const onCreate = () => {
-
+	const onSubmitReview = async(e) => {
+		e.preventDefault();
+		await Axios.post(`http://10.10.12.3:4000/api/review/`, {
+			review: content
+		});
+		dispatch({
+			type: 'ON_SUBMIT_REVIEW',
+			isHidden,
+			content: initialState.content
+		})
 	}
+
 	return (
 		<Layout title={`상세 정보: ${title}`}>
 			<Container 
 				data={data} 
-				write={writeReview}
-				onChange={onChangeReview}
 				onModalView={onModalView}
-				isHide={isHide}
-				onChange={onChange}
+				isHidden={isHidden}
 				onChangeReview={onChangeReview}
 				content={content}
+				onSubmit={onSubmitReview}
 			/>
 		</Layout>
 	);
 };
 
-const Container = ({ data, onCreate, onChange, onModalView, isHide, onSubmit, onChangeReview, content }) => {
+const Container = ({ data, onModalView, isHidden, onSubmit, onChangeReview, content }) => {
 	return (
 		<>
 			<main className={titleCSS.container}>
@@ -97,10 +136,9 @@ const Container = ({ data, onCreate, onChange, onModalView, isHide, onSubmit, on
 			<Review 
 				data={data} 
 				onModalView={onModalView}
-				isHide={isHide}
+				isHidden={isHidden}
 			>
 				<WriteReview 
-					onChange={onChange} 
 					onSubmit={onSubmit}
 					onClick={onModalView}
 					onChange={onChangeReview}
@@ -226,8 +264,8 @@ const Trailer = ({ data }) => {
 	);
 }
 
-const Review = ({ data, review, onModalView, isHide, children }) => {
-	const toggleModal = isHide ? { display: 'flex' } : { display: 'none' };
+const Review = ({ data, review, onModalView, isHidden, children }) => {
+	const toggleModal = isHidden ? { display: 'none' } : { display: 'flex' };
 	return (
 		<div className={titleCSS.review}>
 			<h3>리뷰</h3>
@@ -258,33 +296,32 @@ const Review = ({ data, review, onModalView, isHide, children }) => {
 	);
 };
 
-const WriteReview = ({ onChange, onSubmit, onClick, onChangeReview, content, onCreate }) => {
+const WriteReview = ({ onSubmit, onClick, onChange, content, onCreate }) => {
 	const placeholder = '여기에 내용을 입력하세요';
 	const desc = '리뷰 작성 창을 닫습니다.'
+	console.log(content)
 	return (
 		<>	
 			<form
-				action=''
-				method='POST'
+				method="post"
 				onSubmit={onSubmit}
-				onChange={onChange}
 			>
 				<div className={titleCSS.closeModalWrap}>
 				<FontAwesomeIcon icon={faTimes} onClick={onClick} />
 				</div>
 				<h3>리뷰 작성</h3>
 				<textarea 
-					name="" 
 					cols="30" 
 					rows="10" 
 					placeholder={placeholder}
-					onChange={onChangeReview}
 					maxLength={300}
+					onChange={onChange}
+					value={content}
 				/>
-				<div style={{textAlign: 'right'}}>{`${content.length}/300`}</div>
-				
-
-				<button type='submit' onClick={onCreate}>등록</button>
+				<div style={{textAlign: 'right'}}>
+					{`${content.length}/300`}
+				</div>
+				<button type='submit'>등록</button>
 			</form>
 		</>
 		
