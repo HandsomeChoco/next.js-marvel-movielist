@@ -11,6 +11,15 @@ router.get('/', async (req, res, next) => {
 	return res.status(400).json('no data');
 });
 
+router.post('/', async(req, res, next) => {
+	const review = req.body.review;
+	
+	if(review) {
+		console.log(review)
+		res.status(200).end();
+	}
+});
+
 
 
 module.exports = router;
