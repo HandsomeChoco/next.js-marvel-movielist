@@ -13,8 +13,6 @@
     flex-direction: column;
     justify-content: space-around;
     align-content: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
     height: calc(30vh - 90px);
     text-align: center;
     
