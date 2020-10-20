@@ -80,7 +80,13 @@ class Join extends Component {
 			passwordCheck: this.state.inputs.passwordCheck
 		});
 	}
-
+	_joinCancel = (e) => {
+		e.preventDefault();
+		this.setState({
+			...this.state, 
+			renderComponent: 'Terms'
+		})
+	}
 	render() {
 		const { terms, isAbleToAgree, renderComponent } = this.state;
 		const { id, password, passwordCheck } = this.state.inputs;
@@ -89,7 +95,7 @@ class Join extends Component {
 			<Layout title={title}>
 				{renderComponent==='JoinForm' ?
 					(<JoinForm
-						cancel={this._handleTerms}
+						cancel={this._joinCancel}
 						onSubmit={this._handleSubmit}
 						onChange={this._handleInput}
 						id={id}
