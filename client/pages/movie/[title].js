@@ -12,7 +12,7 @@ import { faThumbsUp, faThumbsDown, } from '@fortawesome/free-regular-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 // 넥스트 & 리액트
-import React, { useState, useEffect, useRef, useReducer } from 'react';
+import React, { useEffect, useRef, useReducer } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -41,8 +41,11 @@ const initialState = {
 }
 
 function reducer(state, action) {
-	console.log('reducewr')
-	console.log(state)
+	const modal = {
+		content: action.content,
+
+	}
+	console.log(action)
     switch(action.type) {
         case 'ON_CHANGE_REVIEW': 
             return {
@@ -62,8 +65,17 @@ function reducer(state, action) {
 			}
 		case 'ON_CREATE_REVIEW': 
 			return {
+				...state, 
 				modal: {
-					content: initialState.content,
+					content: action.content,
+					isHidden: action.isHidden
+				}
+			}
+		case 'ON_RESET': 
+			return {
+				...state,
+				modal: {
+					content: action.content,
 					isHidden: action.isHidden
 				}
 			}
@@ -76,6 +88,7 @@ const Movie = ({ data, review }) => {
 	const { title } = router.query;
 	const [ state, dispatch ] = useReducer(reducer, initialState ); // 리뷰 작성 모달 hide/show 토글 및 모달 내용 
 	const { isHidden, content } = state.modal;
+	const refModal = useRef();
 
 	const onChangeReview = (e) => {
 		const value = e.target.value;
@@ -92,20 +105,30 @@ const Movie = ({ data, review }) => {
 			isHidden: !isHidden,
 			content
 		});
+		refModal.current.focus();
 	}
 	
 	const onSubmitReview = async(e) => {
 		e.preventDefault();
+		console.log('submit');
 		await Axios.post(`http://10.10.12.3:4000/api/review/`, {
 			review: content
 		});
+		
 		dispatch({
-			type: 'ON_SUBMIT_REVIEW',
-			isHidden,
-			content: initialState.content
+			type: 'ON_CREATE_REVIEW',
+			isHidden: true,
+			content: ''
 		})
 	}
 
+	const onReset = () => {
+		dispatch({
+			type: 'ON_RESET',
+			content: '',
+			isHidden
+		})
+	}
 	return (
 		<Layout title={`상세 정보: ${title}`}>
 			<Container 
@@ -115,12 +138,14 @@ const Movie = ({ data, review }) => {
 				onChangeReview={onChangeReview}
 				content={content}
 				onSubmit={onSubmitReview}
+				selectDOM={refModal}
+				onReset={onReset}
 			/>
 		</Layout>
 	);
 };
 
-const Container = ({ data, onModalView, isHidden, onSubmit, onChangeReview, content }) => {
+const Container = ({ data, onModalView, isHidden, onSubmit, onChangeReview, content, selectDOM, onReset }) => {
 	return (
 		<>
 			<main className={titleCSS.container}>
@@ -143,6 +168,8 @@ const Container = ({ data, onModalView, isHidden, onSubmit, onChangeReview, cont
 					onClick={onModalView}
 					onChange={onChangeReview}
 					content={content}
+					selectDOM={selectDOM}
+					onReset={onReset}
 				/>
 			</Review>
 		</>
@@ -296,10 +323,10 @@ const Review = ({ data, review, onModalView, isHidden, children }) => {
 	);
 };
 
-const WriteReview = ({ onSubmit, onClick, onChange, content, onCreate }) => {
+const WriteReview = ({ onSubmit, onClick, onChange, content, onCreate, selectDOM, onReset }) => {
 	const placeholder = '여기에 내용을 입력하세요';
 	const desc = '리뷰 작성 창을 닫습니다.'
-	console.log(content)
+
 	return (
 		<>	
 			<form
@@ -317,12 +344,14 @@ const WriteReview = ({ onSubmit, onClick, onChange, content, onCreate }) => {
 					maxLength={300}
 					onChange={onChange}
 					value={content}
+					ref={selectDOM}
 				/>
 				<div style={{textAlign: 'right'}}>
 					{`${content.length}/300`}
 				</div>
 				<button type='submit'>등록</button>
 			</form>
+			<button onClick={onReset}>초기화</button>
 		</>
 		
 	);
